@@ -34,6 +34,7 @@ public class UserMapperTest {
         for (User someUser: users){
             System.out.println(someUser);
         }
+        assert  users.size() == 1;
     }
 
 }

@@ -24,7 +24,7 @@ public class AdminMapperTest {
         Administrator adminFound = adminMapper.readAdminByAdminName(admin.getAdminName());
         // delete the old one
         if (adminFound != null){
-            adminMapper.deleteUser(adminFound);
+            adminMapper.deleteAdmin(adminFound);
         }
         // create a new one
         adminMapper.createAdmin(admin);
@@ -33,6 +33,7 @@ public class AdminMapperTest {
         for (Administrator someAdmin: admins){
             System.out.println(someAdmin);
         }
+        assert admins.size() == 1;
     }
 
 }
