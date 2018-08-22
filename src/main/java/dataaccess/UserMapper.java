@@ -126,6 +126,7 @@ public class UserMapper {
      * please make sure, there's no existing user
      * with the same username in the business
      * logic layer
+     *
      * @param user
      */
     public void createUser(User user) {
@@ -147,6 +148,7 @@ public class UserMapper {
 
     /**
      * think twice before you delete anything
+     *
      * @param user
      */
     public void deleteUser(User user) {
