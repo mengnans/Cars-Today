@@ -15,7 +15,7 @@ public class DBUtils {
     // db parameters
     private static Connection conn = null;
     private static final String USER_NAME = "root";
-    private static final String PASSWORD = "5314";
+    private static final String PASSWORD = "colinc";
     private static final String DBMS = "mysql";
     private static final String SERVER_NAME = "localhost";
     private static final String PORT_NUMBER = "3306";

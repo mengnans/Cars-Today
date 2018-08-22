@@ -14,39 +14,18 @@ import java.util.ArrayList;
 public class ThreadMapper {
 
     /**
-     * find a specific user, and create
-     * a user object
+     * insert a new threadItem into database
      *
-     * @param tid user's id
-     * @return user object (if exists) or null(if doesn't exist)
+     * @param threadItem
      */
-    public User readThreadById(long tid) {
-        String sql = "SELECT * FROM threads WHERE tid = ?";
-        Connection conn = null;
-        try {
-            conn = DBUtils.getConnection();
-            PreparedStatement preparedStatement = conn.prepareStatement(sql);
-            preparedStatement.setLong(1, tid);
-            ResultSet resultSet = preparedStatement.executeQuery();
-
-            String userName = null;
-            String password = null;
-
-            if (resultSet.next()) {
-                userName = resultSet.getString("username");
-                password = resultSet.getString("password");
-            }
-
-            if (userName != null) {
-                User user = new User(tid, userName, password);
-                return user;
-            } else {
-                return null;
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return null;
+    public void createThread(ThreadItem threadItem) {
+        String _sql = "INSERT INTO threads (uid, username, datetime, header, content) VALUES('"
+                + threadItem.getUid() + "', '"
+                + threadItem.getUserName() + "', '"
+                + threadItem.getDateTime() + "', '"
+                + threadItem.getHeader() + "', '"
+                + threadItem.getContent() + "')";
+        ExecuteNonQuerySql(_sql);
     }
 
     /**
@@ -56,28 +35,54 @@ public class ThreadMapper {
      */
     public ArrayList<ThreadItem> readThreadByUser(User argUser) {
         String _sql = "SELECT * FROM threads WHERE uid ='" + argUser.getUid() + "'";
-
-        ArrayList<ThreadItem> _lstThread = new ArrayList<ThreadItem>();
         ResultSet resultSet = ExecuteQuerySql(_sql);
-        while (resultSet.next()) {
-            Long uid = resultSet.getLong("uid");
-            String userName = resultSet.getString("username");
-            String password = resultSet.getString("password");
+        return ConvertQueryResultToThreads(resultSet);
+    }
 
-            User user = new User(uid, userName, password);
+    /**
+     * find all users
+     *
+     * @return an array list that contains all user objects
+     */
+    public ArrayList<ThreadItem> readThreadById(long tid) {
+        String _sql = "SELECT * FROM threads WHERE tid ='" + tid + "'";
+        ResultSet resultSet = ExecuteQuerySql(_sql);
+        return ConvertQueryResultToThreads(resultSet);
+    }
 
-            _lstThread.add(user);
+    /**
+     * find all users
+     *
+     * @return an array list that contains all user objects
+     */
+    public ArrayList<ThreadItem> readThreadAll() {
+        String _sql = "SELECT * FROM threads";
+        ResultSet resultSet = ExecuteQuerySql(_sql);
+        return ConvertQueryResultToThreads(resultSet);
+    }
+
+    public ArrayList<ThreadItem> ConvertQueryResultToThreads(ResultSet argResultSet) {
+        ArrayList<ThreadItem> _lstThread = new ArrayList<ThreadItem>();
+        try {
+            while (argResultSet.next()) {
+                ThreadItem _threadItem = new ThreadItem();
+                _threadItem.setTid(argResultSet.getLong("tid"));
+                _threadItem.setUid(argResultSet.getLong("uid"));
+                _threadItem.setUserName(argResultSet.getString("username"));
+                _threadItem.setDateTime(argResultSet.getDate("datetime"));
+                _threadItem.setHeader(argResultSet.getString("header"));
+                _threadItem.setContent(argResultSet.getString("content"));
+                _lstThread.add(_threadItem);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
         return _lstThread;
     }
 
-    /**
-     * insert a new threadItem into database
-     *
-     * @param threadItem
-     */
-    public void createThread(ThreadItem threadItem) {
-        String _sql = "INSERT INTO threads (username, password) VALUES(?, ?)";
+    public void updateThread(ThreadItem threadItem) {
+        String _sql =
+                "UPDATE threads SET header= '" + threadItem.getHeader() + "', content= '" + threadItem.getContent() + "' WHERE tid = " + "'" + threadItem.getTid() + "'";
         ExecuteNonQuerySql(_sql);
     }
 
@@ -87,7 +92,7 @@ public class ThreadMapper {
      * @param threadItem
      */
     public void deleteThread(ThreadItem threadItem) {
-        String _sql = "DELETE from threads where tid = " + "'" + threadItem.getTid() + "'";
+        String _sql = "DELETE from threads WHERE tid = " + "'" + threadItem.getTid() + "'";
         ExecuteNonQuerySql(_sql);
     }
 
@@ -122,6 +127,7 @@ public class ThreadMapper {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return null;
     }
 
 }

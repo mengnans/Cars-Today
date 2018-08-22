@@ -1,7 +1,6 @@
 package domain;
 
 import java.sql.Date;
-import java.time.LocalDate;
 
 /**
  * @author Colin
@@ -31,7 +30,7 @@ public class ThreadItem {
     }
 
     public void setTid(long tid) {
-        this.uid = tid;
+        this.tid = tid;
     }
 
     public long getUid() {
@@ -42,13 +41,21 @@ public class ThreadItem {
         this.uid = uid;
     }
 
-    public LocalDate getDateTime() { return dateTime; }
+    public Date getDateTime() {
+        return dateTime;
+    }
 
-    public void setDateTime(LocalDate dateTime) { this.dateTime = dateTime; }
+    public void setDateTime(Date dateTime) {
+        this.dateTime = dateTime;
+    }
 
-    public String getUserName() { return userName; }
+    public String getUserName() {
+        return userName;
+    }
 
-    public void setUserName(String userName) { this.userName = userName; }
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
 
     public String getHeader() {
         return header;
@@ -58,16 +65,23 @@ public class ThreadItem {
         this.header = header;
     }
 
-    public String getContent() { return content; }
+    public String getContent() {
+        return content;
+    }
 
-    public void setContent(String content) { this.content = content; }
+    public void setContent(String content) {
+        this.content = content;
+    }
 
     @Override
     public String toString() {
-        return "User{" +
-                "uid=" + uid +
+        return "ThreadItem{" +
+                "tid=" + tid +
+                ", uid=" + uid +
+                ", dateTime=" + dateTime +
                 ", userName='" + userName + '\'' +
-                ", password='" + password + '\'' +
+                ", header='" + header + '\'' +
+                ", content='" + content + '\'' +
                 '}';
     }
 }
