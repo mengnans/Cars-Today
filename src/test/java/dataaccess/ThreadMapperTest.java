@@ -5,6 +5,7 @@ import domain.ThreadItem;
 import domain.User;
 import org.junit.jupiter.api.Test;
 
+import java.awt.*;
 import java.util.ArrayList;
 
 /**
@@ -43,6 +44,7 @@ public class ThreadMapperTest {
         ThreadItem _itemNew = threadMapper.readThreadAll().get(0);
         assert _item.getHeader().equals(_itemNew.getHeader());
         assert _item.getContent().equals(_itemNew.getContent());
+        System.out.println("Hello");
     }
 
     @Test
