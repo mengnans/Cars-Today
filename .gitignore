@@ -1,3 +1,4 @@
 ./idea/*
+*.xml
 swen90007.iml
 ./out/*
