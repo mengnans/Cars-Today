@@ -1,6 +1,7 @@
 package dataaccess;
 
 import domain.User;
+import utils.Utils;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -19,7 +20,7 @@ public class UserMapper {
      * @param uid user's id
      * @return user object (if exists) or null(if doesn't exist)
      */
-    public User readUserById(long uid) {
+    public static User readUserById(long uid) {
         String sql = "SELECT * FROM user WHERE uid = ?";
         Connection conn = null;
         try {
@@ -55,7 +56,7 @@ public class UserMapper {
      * @param userName user's userName
      * @return user object (if exists) or null(if doesn't exist)
      */
-    public User readUserByUserName(String userName) {
+    public static User readUserByUserName(String userName) {
         String sql = "SELECT * FROM user WHERE username = ?";
         Connection conn = null;
         try {
@@ -93,7 +94,7 @@ public class UserMapper {
      *
      * @return an array list that contains all user objects
      */
-    public ArrayList<User> readAllUsers() {
+    public static ArrayList<User> readAllUsers() {
         String sql = "SELECT * FROM user";
         Connection conn = null;
         try {
@@ -129,15 +130,18 @@ public class UserMapper {
      *
      * @param user
      */
-    public void createUser(User user) {
+    public static void createUser(User user) {
         String sql = "INSERT INTO user (username, password) VALUES(?, ?)";
         Connection conn = null;
         try {
             conn = DBUtils.getConnection();
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
 
+            String pwd = user.getPassword();
+            String encryptedPwd = Utils.getMd5(pwd);
+
             preparedStatement.setString(1, user.getUserName());
-            preparedStatement.setString(2, user.getPassword());
+            preparedStatement.setString(2, encryptedPwd);
 
             preparedStatement.execute();
 
@@ -151,7 +155,7 @@ public class UserMapper {
      *
      * @param user
      */
-    public void deleteUser(User user) {
+    public static void deleteUser(User user) {
         String sql = "DELETE from user where uid = ?";
         Connection conn = null;
         try {

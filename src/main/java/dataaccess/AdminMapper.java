@@ -1,6 +1,7 @@
 package dataaccess;
 
 import domain.Administrator;
+import utils.Utils;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -18,7 +19,7 @@ public class AdminMapper {
      * @param aid admin's id
      * @return admin (if exists) or null(if doesn't exist)
      */
-    public Administrator readAdminById(long aid) {
+    public static Administrator readAdminById(long aid) {
         String sql = "SELECT * FROM administrator WHERE aid = ?";
         Connection conn = null;
         try {
@@ -56,7 +57,7 @@ public class AdminMapper {
      * @param adminName admin's adminName
      * @return admin (if exists) or null(if doesn't exist)
      */
-    public Administrator readAdminByAdminName(String adminName) {
+    public static Administrator readAdminByAdminName(String adminName) {
         String sql = "SELECT * FROM administrator WHERE adminname = ?";
         Connection conn = null;
         try {
@@ -93,7 +94,7 @@ public class AdminMapper {
      * find all admins
      * @return an array list that contains all admins
      */
-    public ArrayList<Administrator> readAllAdmins() {
+    public static ArrayList<Administrator> readAllAdmins() {
         String sql = "SELECT * FROM administrator";
         Connection conn = null;
         try {
@@ -128,15 +129,18 @@ public class AdminMapper {
      * logic layer
      * @param admin
      */
-    public void createAdmin(Administrator admin) {
+    public static void createAdmin(Administrator admin) {
         String sql = "INSERT INTO administrator (adminname, password) VALUES(?, ?)";
         Connection conn = null;
         try {
             conn = DBUtils.getConnection();
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
 
+            String pwd = admin.getPassword();
+            String encryptedPwd = Utils.getMd5(pwd);
+
             preparedStatement.setString(1, admin.getAdminName());
-            preparedStatement.setString(2, admin.getPassword());
+            preparedStatement.setString(2, encryptedPwd);
 
             preparedStatement.execute();
 
@@ -149,7 +153,7 @@ public class AdminMapper {
      * think twice before you delete anything
      * @param admin
      */
-    public void deleteAdmin(Administrator admin) {
+    public static void deleteAdmin(Administrator admin) {
         String sql = "DELETE from administrator where aid = ?";
         Connection conn = null;
         try {

@@ -1,16 +1,17 @@
 <%--
   Created by IntelliJ IDEA.
   User: thund
-  Date: 0021, August 21, 2018
-  Time: 5:32 PM
+  Date: 0027, August 27, 2018
+  Time: 6:44 PM
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-  <head>
-    <title>Cars Today</title>
-  </head>
-  <body>
-  $END$
-  </body>
+<head>
+    <title>Title</title>
+</head>
+<body>
+Welcome
+<%= (String)request.getAttribute("userName") %>
+</body>
 </html>
