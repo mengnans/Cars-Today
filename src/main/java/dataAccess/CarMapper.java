@@ -21,8 +21,7 @@ public class CarMapper {
      * @param carItem
      */
     public void createCar(CarItem carItem) {
-        String _sql = "INSERT INTO cars (cars_id,brand,car_type,car_name,transmission,engine_type,image,price,seller_id,location,milage,description,stock) VALUES('"
-                + carItem.getCarId() + "', '"
+        String _sql = "INSERT INTO cars (brand,car_type,car_name,transmission,engine_type,image,price,seller_id,location,milage,description,stock) VALUES('"
                 + carItem.getBrand() + "', '"
                 + carItem.getCarType() + "', '"
                 + carItem.getCarName() + "', '"
@@ -50,8 +49,7 @@ public class CarMapper {
     }
 
     public void updateCar(CarItem carItem) {
-        String _sql = "UPDATE from SET " +
-                "cars_id= '" + carItem.getCarId() + "', " +
+        String _sql = "UPDATE cars SET " +
                 "brand= '" + carItem.getBrand() + "', " +
                 "car_type= '" + carItem.getCarType() + "', " +
                 "car_name= '" + carItem.getCarName() + "', " +
@@ -63,7 +61,8 @@ public class CarMapper {
                 "location= '" + carItem.getLocation() + "', " +
                 "milage= '" + carItem.getMilage() + "', " +
                 "description= '" + carItem.getDescription() + "', " +
-                "stock= '" + carItem.getStock() + "', " +
+
+                "stock= '" + carItem.getStock() + "'  " +
                 "WHERE cars_id = " + "'" + carItem.getCarId() + "'";
         ExecuteNonQuerySql(_sql);
     }

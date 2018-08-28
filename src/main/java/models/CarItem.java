@@ -23,6 +23,23 @@ public class CarItem {
     private String description;
     private int stock;
 
+    public CarItem() { }
+
+    public CarItem(String brand, String carType, String carName, String transmission, String engineType, String image, int price, long sellerId, String location, int milage, String description, int stock) {
+        this.brand = brand;
+        this.carType = carType;
+        this.carName = carName;
+        this.transmission = transmission;
+        this.engineType = engineType;
+        this.image = image;
+        this.price = price;
+        this.sellerId = sellerId;
+        this.location = location;
+        this.milage = milage;
+        this.description = description;
+        this.stock = stock;
+    }
+
     public long getCarId() {
         return carId;
     }
