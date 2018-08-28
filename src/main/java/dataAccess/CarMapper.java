@@ -1,7 +1,6 @@
 package dataAccess;
 
-import models.CarBriefItem;
-import models.CarDetailedItem;
+import models.CarItem;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -17,98 +16,87 @@ import java.util.ArrayList;
 public class CarMapper {
 
     /**
-     * insert a new CarDetailedItem into database
+     * insert a new CarItem into database
      *
-     * @param carDetailedItem
+     * @param carItem
      */
-    public void createCar(CarDetailedItem carDetailedItem) {
-        String _sql = "INSERT INTO cars (cars_id,image,price,brand,control_type,engine_type,location,seller_id,used_year,description) VALUES('"
-                + carDetailedItem.getCarId() + "', '"
-                + carDetailedItem.getImage() + "', '"
-                + carDetailedItem.getPrice() + "', '"
-                + carDetailedItem.getBrand() + "', '"
-                + carDetailedItem.getControlType() + "', '"
-                + carDetailedItem.getEngineType() + "', '"
-                + carDetailedItem.getLocation() + "', '"
-                + carDetailedItem.getSellerId() + "', '"
-                + carDetailedItem.getUsedYear() + "', '"
-                + carDetailedItem.getDescription() + "')";
+    public void createCar(CarItem carItem) {
+        String _sql = "INSERT INTO cars (cars_id,brand,car_type,car_name,transmission,engine_type,image,price,seller_id,location,milage,description,stock) VALUES('"
+                + carItem.getCarId() + "', '"
+                + carItem.getBrand() + "', '"
+                + carItem.getCarType() + "', '"
+                + carItem.getCarName() + "', '"
+                + carItem.getTransmission() + "', '"
+                + carItem.getEngineType() + "', '"
+                + carItem.getImage() + "', '"
+                + carItem.getPrice() + "', '"
+                + carItem.getSellerId() + "', '"
+                + carItem.getLocation() + "', '"
+                + carItem.getMilage() + "', '"
+                + carItem.getDescription() + "', '"
+                + carItem.getStock() + "')";
         ExecuteNonQuerySql(_sql);
     }
 
     /**
-     * find all cars and store the data in a CarDetailedItem object
+     * find all cars and store the data in a CarItem object
      *
-     * @return an array list that contains all CarDetailedItem objects
+     * @return an array list that contains all CarItem objects
      */
-    public ArrayList<CarDetailedItem> readCarDetailed() {
+    public ArrayList<CarItem> readCar() {
         String _sql = "SELECT * FROM cars";
         ResultSet resultSet = ExecuteQuerySql(_sql);
         return ConvertQueryResultToCarDetailedItem(resultSet);
     }
 
-    /**
-     * find all cars and store the data in a CarBriefItem object
-     *
-     * @return an array list that contains all CarBriefItem objects
-     */
-    public ArrayList<CarBriefItem> readCarBrief() {
-        String _sql = "SELECT cars_id,price,brand,control_type,engine_type,location,used_year FROM cars";
-        ResultSet resultSet = ExecuteQuerySql(_sql);
-        return ConvertQueryResultToCarBriefItem(resultSet);
-    }
-
-    public void updateCar(CarDetailedItem carDetailedItem) {
-        String _sql = "UPDATE from SET price= '" + carDetailedItem.getPrice() + "', description= '" + carDetailedItem.getDescription() + "' WHERE cars_id = " + "'" + carDetailedItem.getCarId() + "'";
+    public void updateCar(CarItem carItem) {
+        String _sql = "UPDATE from SET " +
+                "cars_id= '" + carItem.getCarId() + "', " +
+                "brand= '" + carItem.getBrand() + "', " +
+                "car_type= '" + carItem.getCarType() + "', " +
+                "car_name= '" + carItem.getCarName() + "', " +
+                "transmission= '" + carItem.getTransmission() + "', " +
+                "engine_type= '" + carItem.getEngineType() + "', " +
+                "image= '" + carItem.getImage() + "', " +
+                "price= '" + carItem.getPrice() + "', " +
+                "seller_id= '" + carItem.getSellerId() + "', " +
+                "location= '" + carItem.getLocation() + "', " +
+                "milage= '" + carItem.getMilage() + "', " +
+                "description= '" + carItem.getDescription() + "', " +
+                "stock= '" + carItem.getStock() + "', " +
+                "WHERE cars_id = " + "'" + carItem.getCarId() + "'";
         ExecuteNonQuerySql(_sql);
     }
 
     /**
-     * Delete a threadItem from the database
+     * Delete a CarItem from the database
      *
-     * @param carDetailedItem
+     * @param carItem
      */
-    public void deleteThread(CarDetailedItem carDetailedItem) {
-        String _sql = "DELETE from cars WHERE cars_id = " + "'" + carDetailedItem.getCarId() + "'";
+    public void deleteCar(CarItem carItem) {
+        String _sql = "DELETE from cars WHERE cars_id = " + "'" + carItem.getCarId() + "'";
         ExecuteNonQuerySql(_sql);
     }
 
-    public ArrayList<CarDetailedItem> ConvertQueryResultToCarDetailedItem(ResultSet argResultSet) {
-        ArrayList<CarDetailedItem> _lstThread = new ArrayList<CarDetailedItem>();
+    public ArrayList<CarItem> ConvertQueryResultToCarDetailedItem(ResultSet argResultSet) {
+        ArrayList<CarItem> _lstThread = new ArrayList<CarItem>();
         try {
             while (argResultSet.next()) {
-                CarDetailedItem _carDetailedItem = new CarDetailedItem();
-                _carDetailedItem.setCarId(argResultSet.getLong("cars_id"));
-                _carDetailedItem.setImage(argResultSet.getString("image"));
-                _carDetailedItem.setPrice(argResultSet.getInt("price"));
-                _carDetailedItem.setBrand(argResultSet.getString("brand"));
-                _carDetailedItem.setControlType(argResultSet.getString("control_type"));
-                _carDetailedItem.setEngineType(argResultSet.getString("engine_type"));
-                _carDetailedItem.setLocation(argResultSet.getString("location"));
-                _carDetailedItem.setSellerId(argResultSet.getLong("seller_id"));
-                _carDetailedItem.setUsedYear(argResultSet.getLong("used_year"));
-                _carDetailedItem.setDescription(argResultSet.getString("description"));
-                _lstThread.add(_carDetailedItem);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return _lstThread;
-    }
-
-    public ArrayList<CarBriefItem> ConvertQueryResultToCarBriefItem(ResultSet argResultSet) {
-        ArrayList<CarBriefItem> _lstThread = new ArrayList<CarBriefItem>();
-        try {
-            while (argResultSet.next()) {
-                CarBriefItem _carBriefItem = new CarBriefItem();
-                _carBriefItem.setCarId(argResultSet.getLong("cars_id"));
-                _carBriefItem.setPrice(argResultSet.getInt("price"));
-                _carBriefItem.setBrand(argResultSet.getString("brand"));
-                _carBriefItem.setControlType(argResultSet.getString("control_type"));
-                _carBriefItem.setEngineType(argResultSet.getString("engine_type"));
-                _carBriefItem.setLocation(argResultSet.getString("location"));
-                _carBriefItem.setUsedYear(argResultSet.getLong("used_year"));
-                _lstThread.add(_carBriefItem);
+                CarItem _carItem = new CarItem();
+                _carItem.setCarId(argResultSet.getLong("cars_id"));
+                _carItem.setBrand(argResultSet.getString("brand"));
+                _carItem.setCarType(argResultSet.getString("car_type"));
+                _carItem.setCarName(argResultSet.getString("car_name"));
+                _carItem.setTransmission(argResultSet.getString("transmission"));
+                _carItem.setEngineType(argResultSet.getString("engine_type"));
+                _carItem.setImage(argResultSet.getString("image"));
+                _carItem.setPrice(argResultSet.getInt("price"));
+                _carItem.setSellerId(argResultSet.getLong("seller_id"));
+                _carItem.setLocation(argResultSet.getString("location"));
+                _carItem.setMilage(argResultSet.getInt("milage"));
+                _carItem.setDescription(argResultSet.getString("description"));
+                _carItem.setStock(argResultSet.getInt("stock"));
+                _lstThread.add(_carItem);
             }
         } catch (SQLException e) {
             e.printStackTrace();
