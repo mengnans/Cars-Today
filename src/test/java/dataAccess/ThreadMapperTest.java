@@ -1,11 +1,9 @@
-package dataaccess;
+package dataAccess;
 
-import domain.Administrator;
-import domain.ThreadItem;
-import domain.User;
+import models.ThreadItem;
+import models.User;
 import org.junit.jupiter.api.Test;
 
-import java.awt.*;
 import java.util.ArrayList;
 
 /**

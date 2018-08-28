@@ -1,10 +1,9 @@
-package dataaccess;
+package dataAccess;
 
-import domain.User;
+import models.User;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  * @author Mengnan Shi

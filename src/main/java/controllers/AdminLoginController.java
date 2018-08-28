@@ -1,9 +1,7 @@
 package controllers;
 
-import dataaccess.AdminMapper;
-import dataaccess.UserMapper;
-import domain.Administrator;
-import domain.User;
+import dataAccess.AdminMapper;
+import models.Administrator;
 import utils.Utils;
 
 import javax.servlet.ServletException;

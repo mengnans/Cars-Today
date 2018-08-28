@@ -1,8 +1,7 @@
 package controllers;
 
-import dataaccess.UserMapper;
-import domain.User;
-import utils.Utils;
+import dataAccess.UserMapper;
+import models.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

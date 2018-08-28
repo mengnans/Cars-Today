@@ -1,9 +1,7 @@
-package dataaccess;
+package dataAccess;
 
-import domain.CarBriefItem;
-import domain.CarDetailedItem;
-import domain.ThreadItem;
-import domain.User;
+import models.CarBriefItem;
+import models.CarDetailedItem;
 
 import java.sql.Connection;
 import java.sql.ResultSet;

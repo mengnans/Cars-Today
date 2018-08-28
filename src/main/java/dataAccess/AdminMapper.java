@@ -1,6 +1,6 @@
-package dataaccess;
+package dataAccess;
 
-import domain.Administrator;
+import models.Administrator;
 import utils.Utils;
 
 import java.sql.*;

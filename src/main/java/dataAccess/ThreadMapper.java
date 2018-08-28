@@ -1,7 +1,7 @@
-package dataaccess;
+package dataAccess;
 
-import domain.ThreadItem;
-import domain.User;
+import models.ThreadItem;
+import models.User;
 
 import java.sql.*;
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package domain;
+package models;
 
 /**
  * @author Mengnan Shi

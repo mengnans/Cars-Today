@@ -1,6 +1,6 @@
-package dataaccess;
+package dataAccess;
 
-import domain.User;
+import models.User;
 import utils.Utils;
 
 import java.sql.*;

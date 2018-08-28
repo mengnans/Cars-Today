@@ -1,6 +1,6 @@
-package dataaccess;
+package dataAccess;
 
-import domain.Administrator;
+import models.Administrator;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
