@@ -1,0 +1,32 @@
+.my-content {
+    margin-top: 64px;
+    width: 100vw;
+    font-size: 20px;
+    text-align: center;
+}
+
+.img-detailed {
+    width: 66.2vw;
+}
+
+.car-detail-box {
+    margin-top: 30px;
+    text-align: left;
+}
+
+.button-box {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.my-header {
+    font-size: 32px;
+    margin: 10px 0;
+    font-weight: bold;
+    border-bottom: 4px black;
+}
+
+.my-button{
+    width: 66.2vw;
+}

@@ -12,6 +12,6 @@
 </head>
 <body>
 Welcome
-<%= (String)request.getAttribute("userName") %>
+<%= (String)session.getAttribute("userName") %>
 </body>
 </html>

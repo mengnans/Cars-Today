@@ -6,8 +6,10 @@ import utils.Utils;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 /**
@@ -21,8 +23,25 @@ public class LoginController extends MyServlet {
 
 
     @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        HttpSession session = req.getSession();
+        Object userIdInSession = session.getAttribute("userId");
+        if (userIdInSession != null ){
+            forward("/home.jsp", req, resp);
+        } else {
+            forward("/login.jsp", req, resp);
+        }
+    }
+
+    @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
         String userName = req.getParameter("userName");
+
+        if (userName == null){
+            forward("/login.jsp", req, resp);
+        }
+
         // find the user from database
         User user = UserMapper.readUserByUserName(userName);
 
@@ -32,9 +51,14 @@ public class LoginController extends MyServlet {
             String encryptedPwd = Utils.getMd5(pwd);
             // correct password
             if (encryptedPwd != null && encryptedPwd.equals(user.getPassword())){
+                HttpSession session = req.getSession();
+                // we are setting userId and userName as session
+                // so before the user closes the browser or delete
+                // the session, we don't need to search the user
+                // table again.
+                session.setAttribute("userId", user.getUid());
+                session.setAttribute("userName", user.getUserName());
                 // navigate to home page
-                req.setAttribute("userId", user.getUid());
-                req.setAttribute("userName", user.getUserName());
                 forward("/home.jsp", req, resp);
                 return;
             }
