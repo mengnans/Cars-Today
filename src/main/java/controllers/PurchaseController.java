@@ -49,7 +49,7 @@ public class PurchaseController extends MyServlet {
         }
 
         Long cid = Long.valueOf(req.getParameter("cid"));
-        CarItem car = CarMapper.readCarById(cid);
+        CarItem car = CarMapper.readCarByID(""+cid).get(0);
         int carStock = car.getStock();
         if (carStock >= 1){
             car.setStock(carStock - 1);

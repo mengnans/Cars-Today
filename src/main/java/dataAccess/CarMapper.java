@@ -49,7 +49,7 @@ public class CarMapper {
     }
 
     /**
-     * find all cars and store the data in a CarItem object
+     * find cars and store the data in a CarItem object
      *
      * @return an array list that contains all CarItem objects
      */

@@ -55,7 +55,7 @@
                 <img src="styles/demoImage.png" style="width:25vw;">
             </div>
             <div class="col-sm-8">
-                <a href="car?id=${_item.getCarId()}"> ${_item.getCarName()} </a>
+                <a href="detail?cid=${_item.getCarId()}"> ${_item.getCarName()} </a>
                 <ul>
                     <li>Brand: ${_item.getBrand()}</li>
                     <li>CarType: ${_item.getCarType()}</li>

@@ -30,8 +30,7 @@ public class CarDetailController extends MyServlet{
         }
 
         Long cid = Long.valueOf(req.getParameter("cid"));
-//        CarItem carItem = CarMapper
-        cid = 1L;
+
         if (cid == null) {
             req.setAttribute("error","Car not found");
             forward("/error.jsp", req, resp);
@@ -45,7 +44,7 @@ public class CarDetailController extends MyServlet{
         CarItem car = cached.get(cid);
         // if it's not in cached
         if (car == null){
-            car = CarMapper.readCarById(cid);
+            car = CarMapper.readCarByID("" + cid).get(0);
             cached.put(cid, car);
         }
 
