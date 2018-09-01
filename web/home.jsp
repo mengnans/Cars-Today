@@ -19,11 +19,9 @@
 
     <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="styles/home.css"/>
     <title>Home</title>
 </head>
 <body>
-
 
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container-fluid">
@@ -42,16 +40,33 @@
     </div>
 </nav>
 
-<div class="container-fluid  my-list">
+<div class="my-filter" style="margin-top: 64px;font-size: 24pt;">
+    &nbsp<a href="home">All Brand</a>&nbsp&nbsp
+    <c:forEach items="${_lstBrand}" var="_item">
+        <a href="home?brand=${_item}">${_item}</a>&nbsp&nbsp
+    </c:forEach>
+</div>
+
+<div class="container-fluid my-list" style="margin-top: 16px;font-size: 18pt;">
     <c:forEach items="${_lstCar}" var="_item">
-        <div class="row">
-            <div class="col-sm-2"><a href="car?id=${_item.getDescription()}"> ${_item.getDescription()} </a></div>
-            <div class="col-sm-8" style="background-color: #0f0"> ${_item.getBrand()} </div>
-            <div class="col-sm-2"> ${_item.getCarName()} </div>
+        <div class="row" style="border: 1px solid grey;">
+            <div class="col-sm-4">
+                    <%--<a href="car?id=${_item.getCarId()}"> ${_item.getCarName()} </a>--%>
+                <img src="styles/demoImage.png" style="width:25vw;">
+            </div>
+            <div class="col-sm-8">
+                <a href="car?id=${_item.getCarId()}"> ${_item.getCarName()} </a>
+                <ul>
+                    <li>Brand: ${_item.getBrand()}</li>
+                    <li>CarType: ${_item.getCarType()}</li>
+                    <li>Transmission: ${_item.getTransmission()}</li>
+                    <li>Only $${_item.getPrice()}</li>
+                </ul>
+            </div>
         </div>
     </c:forEach>
-
-
 </div>
+
+
 </body>
 </html>

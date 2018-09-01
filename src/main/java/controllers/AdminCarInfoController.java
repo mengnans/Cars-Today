@@ -1,10 +1,7 @@
 package controllers;
 
 import dataAccess.CarMapper;
-import dataAccess.UserMapper;
 import models.CarItem;
-import models.User;
-import utils.Utils;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,24 +15,20 @@ import java.util.ArrayList;
  * @create 2018-8-28 20:51:00
  */
 
-@WebServlet("/home")
-public class HomeController extends MyServlet {
+@WebServlet("/admin/carInfo")
+public class AdminCarInfoController extends MyServlet {
     private static final long serialVersionUID = 1L;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String _brand = req.getParameter("brand");
-        ArrayList<CarItem> _lstCar;
-        if (_brand == null || _brand.isEmpty()) {
-            _lstCar = CarMapper.readCar();
+        String _id = req.getParameter("id");
+        ArrayList<CarItem> _lstCar = CarMapper.readCarByID(_id);
+        if (_lstCar.size() == 0) {
+            forward("/admin/carAdd.jsp", req, resp);
         } else {
-            _lstCar = CarMapper.readCarByBrand(_brand);
+            req.setAttribute("car", _lstCar.get(0));
+            forward("/admin/carEdit.jsp", req, resp);
         }
-
-        ArrayList<String> _lstBrand = CarMapper.readAllBrand();
-        req.setAttribute("_lstBrand", _lstBrand);
-        req.setAttribute("_lstCar", _lstCar);
-        forward("/home.jsp", req, resp);
     }
 
 }
