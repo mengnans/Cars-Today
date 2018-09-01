@@ -14,12 +14,15 @@ public class DBUtils {
 
     // db parameters
     private static Connection conn = null;
-    private static final String USER_NAME = "root";
-    private static final String PASSWORD = "5314";
+    private static final String USER_NAME = "b357bae083caf3";
+    private static final String PASSWORD = "048b8249";
     private static final String DBMS = "mysql";
-    private static final String SERVER_NAME = "localhost";
+    private static final String SERVER_NAME = "us-cdbr-iron-east-01.cleardb.net";
     private static final String PORT_NUMBER = "3306";
-    private static final String DB_NAME = "mvc";
+    private static final String DB_NAME = "heroku_f7f811610f984f9";
+
+//    mysql://b357bae083caf3:048b8249@us-cdbr-iron-east-01.cleardb.net/heroku_f7f811610f984f9?reconnect=true
+
 
     public static Connection getConnection() throws SQLException {
 

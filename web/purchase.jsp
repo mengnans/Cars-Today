@@ -28,23 +28,26 @@
                 <a class="navbar-brand" href="/home">Cars Today</a>
             </div>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="/sign-up.jsp"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-                <li><a href="/login.jsp"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                <li><a href="/order"><span class="glyphicon glyphicon-user"></span> My Orders</a></li>
+                <li><a href="/logout"><span class="glyphicon glyphicon-log-in"></span> Log out</a></li>
             </ul>
         </div>
     </nav>
 
     <div class="container-fluid my-form">
-        <form action="/login" method="post">
+        <form action="/purchase" method="post">
             <div class="form-group">
-                <label for="userName">Username:</label>
-                <input type="text" class="form-control" id="userName" placeholder="Enter your user name" name="userName">
+                <input type="hidden" class="form-control" id="cid" name="cid" value="${cid}">
             </div>
             <div class="form-group">
-                <label for="pwd">Password:</label>
-                <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="password">
+                <label for="address">Address:</label>
+                <input type="text" class="form-control" id="address" placeholder="Enter your address" name="address">
             </div>
-            <button type="submit" class="btn btn-default">Submit</button>
+            <div class="form-group">
+                <label for="phone">Address:</label>
+                <input type="text" class="form-control" id="phone" placeholder="Enter your phone number" name="phone">
+            </div>
+            <button type="submit" class="btn btn-default">Purchase</button>
         </form>
 
     </div>

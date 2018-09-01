@@ -12,24 +12,18 @@ import java.util.ArrayList;
 
 public class AdminMapperTest {
 
-    private static AdminMapper adminMapper;
-
-    static {
-        adminMapper = new AdminMapper();
-    }
-
     @Test
     void createUserTest(){
         Administrator admin = new Administrator("root","5314");
-        Administrator adminFound = adminMapper.readAdminByAdminName(admin.getAdminName());
+        Administrator adminFound = AdminMapper.readAdminByAdminName(admin.getAdminName());
         // delete the old one
         if (adminFound != null){
-            adminMapper.deleteAdmin(adminFound);
+            AdminMapper.deleteAdmin(adminFound);
         }
         // create a new one
-        adminMapper.createAdmin(admin);
+        AdminMapper.createAdmin(admin);
         // find all
-        ArrayList<Administrator> admins = adminMapper.readAllAdmins();
+        ArrayList<Administrator> admins = AdminMapper.readAllAdmins();
         for (Administrator someAdmin: admins){
             System.out.println(someAdmin);
         }
