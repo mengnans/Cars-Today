@@ -7,11 +7,11 @@
   Date: 0027, August 27, 2018
   Time: 6:44 PM
   To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<head>
-    <!-- Latest compiled and minified CSS -->
+    --%>
+    <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+    <html>
+    <head>
+        <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
     <!-- jQuery library -->
@@ -49,7 +49,7 @@
             <div class="row" style="border: 1px solid grey;">
                 <div class="col-sm-4">
                     <%--<a href="car?id=${_item.getCarId()}"> ${_item.getCarName()} </a>--%>
-                <img src="../styles/demoImage.png" style="width:25vw;">
+                <img src="${_item.getImage()}" style="width:25vw;">
             </div>
             <div class="col-sm-6">
                     ${_item.getCarName()}

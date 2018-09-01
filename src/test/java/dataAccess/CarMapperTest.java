@@ -12,10 +12,17 @@ import java.util.ArrayList;
  */
 public class CarMapperTest {
 
-    private static CarMapper CarMapper;
+    static { }
 
-    static {
-        CarMapper = new CarMapper();
+    @Test
+    void createDemoCars() {
+        String _value = "100";
+        int _value1 = Integer.parseInt(_value);
+        ArrayList<CarItem> _data = CarMapper.readCarByID("3");
+        int a = 1;
+//        CarMapper.createCar(new CarItem("Brand1", "Type1", "Name1", "Transmission1", "Engine1", "", 1, 0, "Location1", 1, "Description1", 1));
+//        CarMapper.createCar(new CarItem("Brand2", "Type2", "Name2", "Transmission2", "Engine2", "", 2, 0, "Location2", 2, "Description2", 2));
+//        CarMapper.createCar(new CarItem("Brand3", "Type3", "Name3", "Transmission3", "Engine3", "", 3, 0, "Location3", 3, "Description3", 3));
     }
 
     @Test
