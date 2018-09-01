@@ -18,13 +18,15 @@ public class OrderMapper {
      * find all orders
      * @return an array list that contains all orders
      */
-    public static ArrayList<Order> readAllOrders() {
-        String sql = "SELECT * FROM 'order'";
+    public static ArrayList<Order> readAllOrdersByUserId(Long uId) {
+        String sql = "SELECT * FROM orders where user_id = ?";
         Connection conn = null;
         try {
             conn = DBUtils.getConnection();
-            Statement statement = conn.createStatement();
-            ResultSet resultSet = statement.executeQuery(sql);
+            PreparedStatement preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setLong(1,uId);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
 
             ArrayList<Order> orders = new ArrayList<Order>();
 
@@ -46,6 +48,8 @@ public class OrderMapper {
                 }
                 Order order = new Order(oId, carId, userId, address, phone, statusString);
                 orders.add(order);
+                if (!order.getStatus().equals("Closed"))
+                    updateOrder(order);
             }
 
             return orders;
@@ -61,7 +65,7 @@ public class OrderMapper {
      * @param order a new order
      */
     public static void updateOrder(Order order) {
-        String sql = "UPDATE 'order' SET status = ?";
+        String sql = "UPDATE orders SET status = ? where oid = ?";
         Connection conn = null;
         try {
             conn = DBUtils.getConnection();
@@ -71,16 +75,15 @@ public class OrderMapper {
             int status;
             if (statusString.equals("Initializing"))
                 status  = 1;
-            if (statusString.equals("Processing"))
+            else if (statusString.equals("Processing"))
                 status = 2;
-            if (statusString.equals("Delivering"))
-                status = 3;
-            if (statusString.equals("Closed"))
-                status = 3;
             else
                 status = 3;
 
+
             preparedStatement.setInt(1, status);
+            preparedStatement.setLong(2,order.getoId());
+
 
             preparedStatement.execute();
 
@@ -94,7 +97,7 @@ public class OrderMapper {
      * @param order a new order
      */
     public static void createOrder(Order order) {
-        String sql = "INSERT INTO Order (cars_id, user_id, address, phone, status) VALUES(?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO orders (cars_id, user_id, address, phone, status) VALUES(?, ?, ?, ?, ?)";
         Connection conn = null;
         try {
             conn = DBUtils.getConnection();
@@ -112,7 +115,6 @@ public class OrderMapper {
             preparedStatement.setString(4,phone);
             preparedStatement.setInt(5,status);
 
-            System.out.println(preparedStatement.toString());
             preparedStatement.execute();
 
         } catch (SQLException e) {

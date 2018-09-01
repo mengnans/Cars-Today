@@ -18,11 +18,13 @@ public class OrderMapperTest {
         OrderMapper.createOrder(order);
 
         ArrayList<Order> orders;
-        orders = OrderMapper.readAllOrders();
+        orders = OrderMapper.readAllOrdersByUserId(1L);
 
         for (Order myOrder: orders){
             System.out.println(myOrder.toString());
         }
+
+
     }
 
 }
