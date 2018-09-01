@@ -48,6 +48,17 @@ public class CarMapper {
         return ConvertQueryResultToCarDetailedItem(resultSet);
     }
 
+    /**
+     * find all cars and store the data in a CarItem object
+     *
+     * @return an array list that contains all CarItem objects
+     */
+    public static CarItem readCarById(Long carId) {
+        String _sql = "SELECT * FROM cars where cars_id = " + carId;
+        ResultSet resultSet = ExecuteQuerySql(_sql);
+        return ConvertQueryResultToCarDetailedItem(resultSet).get(0);
+    }
+
     public void updateCar(CarItem carItem) {
         String _sql = "UPDATE cars SET " +
                 "brand= '" + carItem.getBrand() + "', " +
@@ -77,7 +88,7 @@ public class CarMapper {
         ExecuteNonQuerySql(_sql);
     }
 
-    public ArrayList<CarItem> ConvertQueryResultToCarDetailedItem(ResultSet argResultSet) {
+    public static ArrayList<CarItem> ConvertQueryResultToCarDetailedItem(ResultSet argResultSet) {
         ArrayList<CarItem> _lstThread = new ArrayList<CarItem>();
         try {
             while (argResultSet.next()) {
@@ -124,7 +135,7 @@ public class CarMapper {
      *
      * @param argSql The sql command
      */
-    private ResultSet ExecuteQuerySql(String argSql) {
+    private static ResultSet ExecuteQuerySql(String argSql) {
         Connection _connection = null;
         try {
             _connection = DBUtils.getConnection();

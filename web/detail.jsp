@@ -30,6 +30,7 @@
                 <a class="navbar-brand" href="/home">Cars Today</a>
             </div>
             <ul class="nav navbar-nav navbar-right">
+                <li><a href="/order"><span class="glyphicon glyphicon-user"></span> My Orders</a></li>
                 <li><a href="/logout"><span class="glyphicon glyphicon-log-in"></span> Log out</a></li>
             </ul>
         </div>
@@ -63,12 +64,12 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-2"></div>
-                    <div class="col-sm-8">Thisi s  aoifdasifjoadfjawofjiwoeaj foaeijfioeawjf     asfjawoeifjaweoifjaiwoefj awojf eaiwojf awoejfeawofj aoejfeawo jfweaoijf aoiefjawoiefj awoejfawoeijf oeaiwfj awoejf woeafj woeafj oweajf oeaw ${car.engineType}</div>
+                    <div class="col-sm-8">${car.description}</div>
                 </div>
             </div>
 
         <div class="button-box">
-            <button type="button" class="btn btn-primary my-button">Buy Now</button>
+            <a class="btn btn-primary my-button" href="/purchase?cid=${car.carId}" role="button">Buy Now</a>
         </div>
     </div>
 

@@ -1,8 +1,6 @@
 package dataAccess;
 
-import models.Administrator;
 import models.Order;
-import utils.Utils;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -16,15 +14,16 @@ public class OrderMapper {
 
     /**
      * find all orders
+     *
      * @return an array list that contains all orders
      */
     public static ArrayList<Order> readAllOrdersByUserId(Long uId) {
-        String sql = "SELECT * FROM orders where user_id = ?";
+        String sql = "SELECT * FROM orders where user_id = ? order by oid desc";
         Connection conn = null;
         try {
             conn = DBUtils.getConnection();
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
-            preparedStatement.setLong(1,uId);
+            preparedStatement.setLong(1, uId);
 
             ResultSet resultSet = preparedStatement.executeQuery();
 
@@ -37,18 +36,29 @@ public class OrderMapper {
                 String address = resultSet.getString("address");
                 String phone = resultSet.getString("phone");
                 int status = resultSet.getInt("status");
+                Date date = resultSet.getDate("date");
 
                 String statusString;
                 switch (status) {
-                    case 0: statusString = "Initializing"; break;
-                    case 1: statusString = "Processing"; break;
-                    case 2: statusString = "Delivering"; break;
-                    case 3: statusString = "Closed"; break;
-                    default: statusString = "Error"; break;
+                    case 0:
+                        statusString = "Initializing";
+                        break;
+                    case 1:
+                        statusString = "Processing";
+                        break;
+                    case 2:
+                        statusString = "Delivering";
+                        break;
+                    case 3:
+                        statusString = "Delivered";
+                        break;
+                    default:
+                        statusString = "Error";
+                        break;
                 }
-                Order order = new Order(oId, carId, userId, address, phone, statusString);
+                Order order = new Order(oId, carId, userId, address, phone, statusString, date);
                 orders.add(order);
-                if (!order.getStatus().equals("Closed"))
+                if (!order.getStatus().equals("Delivered"))
                     updateOrder(order);
             }
 
@@ -62,6 +72,7 @@ public class OrderMapper {
 
     /**
      * create a new order
+     *
      * @param order a new order
      */
     public static void updateOrder(Order order) {
@@ -74,7 +85,7 @@ public class OrderMapper {
             String statusString = order.getStatus();
             int status;
             if (statusString.equals("Initializing"))
-                status  = 1;
+                status = 1;
             else if (statusString.equals("Processing"))
                 status = 2;
             else
@@ -82,7 +93,7 @@ public class OrderMapper {
 
 
             preparedStatement.setInt(1, status);
-            preparedStatement.setLong(2,order.getoId());
+            preparedStatement.setLong(2, order.getOId());
 
 
             preparedStatement.execute();
@@ -94,10 +105,11 @@ public class OrderMapper {
 
     /**
      * create a new order
+     *
      * @param order a new order
      */
     public static void createOrder(Order order) {
-        String sql = "INSERT INTO orders (cars_id, user_id, address, phone, status) VALUES(?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO orders (cars_id, user_id, address, phone, status, date) VALUES(?, ?, ?, ?, ?, ?)";
         Connection conn = null;
         try {
             conn = DBUtils.getConnection();
@@ -107,13 +119,15 @@ public class OrderMapper {
             Long userId = order.getUserId();
             String address = order.getAddress();
             String phone = order.getPhone();
+            Date date = order.getDate();
             int status = 0;
 
             preparedStatement.setLong(1, carId);
             preparedStatement.setLong(2, userId);
-            preparedStatement.setString(3,address);
-            preparedStatement.setString(4,phone);
-            preparedStatement.setInt(5,status);
+            preparedStatement.setString(3, address);
+            preparedStatement.setString(4, phone);
+            preparedStatement.setInt(5, status);
+            preparedStatement.setDate(6, date);
 
             preparedStatement.execute();
 

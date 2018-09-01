@@ -51,4 +51,9 @@ public class CarMapperTest {
         assert _lst.size() == 0;
     }
 
+    @Test
+    void readCarByIdTest (){
+        CarItem car = CarMapper.readCarById(1L);
+        assert car.getCarName().equals("Tiguan");
+    }
 }
