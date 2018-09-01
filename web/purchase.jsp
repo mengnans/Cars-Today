@@ -44,7 +44,7 @@
                 <input type="text" class="form-control" id="address" placeholder="Enter your address" name="address">
             </div>
             <div class="form-group">
-                <label for="phone">Address:</label>
+                <label for="phone">Phone:</label>
                 <input type="text" class="form-control" id="phone" placeholder="Enter your phone number" name="phone">
             </div>
             <button type="submit" class="btn btn-default">Purchase</button>
