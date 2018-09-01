@@ -20,7 +20,7 @@ public class CarMapper {
      *
      * @param carItem
      */
-    public void createCar(CarItem carItem) {
+    public static void createCar(CarItem carItem) {
         String _sql = "INSERT INTO cars (brand,car_type,car_name,transmission,engine_type,image,price,seller_id,location,milage,description,stock) VALUES('"
                 + carItem.getBrand() + "', '"
                 + carItem.getCarType() + "', '"
@@ -42,7 +42,7 @@ public class CarMapper {
      *
      * @return an array list that contains all CarItem objects
      */
-    public ArrayList<CarItem> readCar() {
+    public static ArrayList<CarItem> readCar() {
         String _sql = "SELECT * FROM cars";
         ResultSet resultSet = ExecuteQuerySql(_sql);
         return ConvertQueryResultToCarDetailedItem(resultSet);
@@ -53,13 +53,38 @@ public class CarMapper {
      *
      * @return an array list that contains all CarItem objects
      */
-    public static CarItem readCarById(Long carId) {
-        String _sql = "SELECT * FROM cars where cars_id = " + carId;
+    public static ArrayList<CarItem> readCarByID(String argID) {
+        String _sql = "SELECT * FROM cars WHERE cars_id='"+argID+"'";
         ResultSet resultSet = ExecuteQuerySql(_sql);
-        return ConvertQueryResultToCarDetailedItem(resultSet).get(0);
+        return ConvertQueryResultToCarDetailedItem(resultSet);
     }
 
-    public void updateCar(CarItem carItem) {
+    public static ArrayList<String> readAllBrand() {
+        String _sql = "SELECT DISTINCT brand FROM cars";
+        ResultSet resultSet = ExecuteQuerySql(_sql);
+        ArrayList<String> _lstBrand = new ArrayList<String>();
+        try {
+            while (resultSet.next()) {
+                _lstBrand.add(resultSet.getString("brand"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return _lstBrand;
+    }
+
+    /**
+     * find cars of given brand and store the data in a CarItem object
+     *
+     * @return an array list that contains all CarItem objects
+     */
+    public static ArrayList<CarItem> readCarByBrand(String argBrand) {
+        String _sql = "SELECT * FROM cars WHERE brand='" + argBrand + "'";
+        ResultSet resultSet = ExecuteQuerySql(_sql);
+        return ConvertQueryResultToCarDetailedItem(resultSet);
+    }
+
+    public static void updateCar(CarItem carItem) {
         String _sql = "UPDATE cars SET " +
                 "brand= '" + carItem.getBrand() + "', " +
                 "car_type= '" + carItem.getCarType() + "', " +
@@ -83,7 +108,7 @@ public class CarMapper {
      *
      * @param carItem
      */
-    public void deleteCar(CarItem carItem) {
+    public static void deleteCar(CarItem carItem) {
         String _sql = "DELETE from cars WHERE cars_id = " + "'" + carItem.getCarId() + "'";
         ExecuteNonQuerySql(_sql);
     }
@@ -119,7 +144,7 @@ public class CarMapper {
      *
      * @param argSql The sql command
      */
-    private void ExecuteNonQuerySql(String argSql) {
+    private static void ExecuteNonQuerySql(String argSql) {
         Connection _connection = null;
         try {
             _connection = DBUtils.getConnection();
