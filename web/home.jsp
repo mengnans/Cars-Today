@@ -25,17 +25,15 @@
 
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container-fluid">
-        <div class="navbar-header navbar-brand">
-            Cars Today
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/admin/home">Cars Today</a>
         </div>
         <ul class="nav navbar-nav">
-            <li class="active"><a href="/home.jsp">Home</a></li>
-            <li class="active"><a href="/new-car.jsp">New Car</a></li>
-            <li class="active"><a href="/second-hand-car.jsp">Second-hand Car</a></li>
+            <li class="active"><a href="/admin/login.jsp">Admin Mode</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-            <li><a href="/sign-up.jsp"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-            <li><a href="/login.jsp"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+            <li><a href="/order"><span class="glyphicon glyphicon-user"></span> My Orders</a></li>
+            <li><a href="/logout"><span class="glyphicon glyphicon-log-in"></span> Log out</a></li>
         </ul>
     </div>
 </nav>

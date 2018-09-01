@@ -18,28 +18,25 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
     <link rel="stylesheet" href="../styles/login.css"/>
-    <title>Administrator log in</title>
+    <title>Add new car</title>
 </head>
 <body>
 <div>
     <nav class="navbar navbar-default navbar-fixed-top">
-        <div class="container-fluid">
-            <div class="navbar-header navbar-brand">
-                Admin Mode
-            </div>
-            <ul class="nav navbar-nav">
-                <li class="active"><a href="/home.jsp">Home</a></li>
-                <li class="active"><a href="/new-car.jsp">New Car</a></li>
-                <li class="active"><a href="/second-hand-car.jsp">Second-hand Car</a></li>
-            </ul>
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/admin/home">Admin Mode</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li class="active"><a href="/login.jsp">User Mode</a></li>
+        </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="./login.jsp"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                <li><a href="/admin/logout"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
             </ul>
         </div>
     </nav>
 
-    <div class="container-fluid my-form">
-        <form action="/admin/carAdd" method="post">
+    <div class="container-fluid my-form" style="margin-top: 64px">
+        <form action="/admin/car/add" method="post">
 
             <div class="form-group">
                 <label for="brand">Brand:</label>

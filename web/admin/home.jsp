@@ -8,10 +8,10 @@
   Time: 6:44 PM
   To change this template use File | Settings | File Templates.
     --%>
-    <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-    <html>
-    <head>
-        <!-- Latest compiled and minified CSS -->
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
     <!-- jQuery library -->
@@ -19,35 +19,32 @@
 
     <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <title>Home</title>
+    <title>Admin home</title>
 </head>
 <body>
 
-<nav class="navbar navbar-inverse navbar-fixed-top">
+<nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
-        <div class="navbar-header navbar-brand">
-            Cars Today
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/admin/home">Admin Mode</a>
         </div>
         <ul class="nav navbar-nav">
-        <li class="active"><a href="/home.jsp">Home</a></li>
-        <li class="active"><a href="/new-car.jsp">New Car</a></li>
-        <li class="active"><a href="/second-hand-car.jsp">Second-hand Car</a></li>
+            <li class="active"><a href="/login.jsp">User Mode</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-        <li><a href="/sign-up.jsp"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-        <li><a href="/login.jsp"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+            <li><a href="/admin/logout"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
         </ul>
-        </div>
-        </nav>
+    </div>
+</nav>
 
-        <div style="margin-top: 64px;font-size: 24pt;">
-        &nbsp<a href="carInfo">Add New Car</a>
-        </div>
+<div style="margin-top: 64px;font-size: 24pt;">
+    &nbsp<a href="/admin/car/info">Add New Car</a>
+</div>
 
-        <div class="container-fluid my-list" style="margin-top: 16px;font-size: 18pt;">
-        <c:forEach items="${_lstCar}" var="_item">
-            <div class="row" style="border: 1px solid grey;">
-                <div class="col-sm-4">
+<div class="container-fluid my-list" style="margin-top: 16px;font-size: 18pt;">
+    <c:forEach items="${_lstCar}" var="_item">
+        <div class="row" style="border: 1px solid grey;">
+            <div class="col-sm-4">
                     <%--<a href="car?id=${_item.getCarId()}"> ${_item.getCarName()} </a>--%>
                 <img src="${_item.getImage()}" style="width:25vw;">
             </div>
@@ -62,8 +59,8 @@
             </div>
             <div class="col-sm-2">
                 <ul>
-                    <li><a href="carInfo?id=${_item.getCarId()}"> Edit </a></li>
-                    <li><a href="homeDelete?id=${_item.getCarId()}"> Delete </a></li>
+                    <li><a href="/admin/car/info?id=${_item.getCarId()}"> Edit </a></li>
+                    <li><a href="/admin/car/delete?id=${_item.getCarId()}"> Delete </a></li>
                 </ul>
             </div>
         </div>

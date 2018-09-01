@@ -10,6 +10,7 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -24,6 +25,14 @@ public class HomeController extends MyServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        // if user didn't log in
+        HttpSession session = req.getSession();
+        Object userIdInSession = session.getAttribute("userId");
+        if (userIdInSession == null ){
+            forward("/login.jsp", req, resp);
+        }
+
+
         String _brand = req.getParameter("brand");
         ArrayList<CarItem> _lstCar;
         if (_brand == null || _brand.isEmpty()) {
@@ -38,4 +47,8 @@ public class HomeController extends MyServlet {
         forward("/home.jsp", req, resp);
     }
 
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        doGet(req, resp);
+    }
 }

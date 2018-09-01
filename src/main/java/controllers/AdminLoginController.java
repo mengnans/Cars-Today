@@ -25,7 +25,7 @@ public class AdminLoginController extends MyServlet {
         HttpSession session = req.getSession();
         Object adminIdInSession = session.getAttribute("adminId");
         if (adminIdInSession != null ){
-            forward("/admin/home.jsp", req, resp);
+            forward("/admin/home", req, resp);
         } else {
             forward("/admin/login.jsp", req, resp);
         }
@@ -43,10 +43,10 @@ public class AdminLoginController extends MyServlet {
             String encryptedPwd = Utils.getMd5(pwd);
             // correct password
             if (encryptedPwd != null && encryptedPwd.equals(admin.getPassword())){
-                // navigate to home page
-                req.setAttribute("adminId", admin.getAid());
-                req.setAttribute("adminName", adminName);
-                forward("/admin/home.jsp", req, resp);
+                HttpSession session = req.getSession();
+                session.setAttribute("adminId", admin.getAid());
+                session.setAttribute("adminName", admin.getAdminName());
+                forward("/admin/home", req, resp);
                 return;
             }
         }

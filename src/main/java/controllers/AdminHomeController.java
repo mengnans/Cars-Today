@@ -7,6 +7,7 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -21,6 +22,15 @@ public class AdminHomeController extends MyServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        // if admin didn't log in
+        HttpSession session = req.getSession();
+        Object adminIdInSession = session.getAttribute("adminId");
+        if (adminIdInSession == null ){
+            forward("/admin/login.jsp", req, resp);
+        }
+
+
         ArrayList<CarItem>  _lstCar = CarMapper.readCar();
         req.setAttribute("_lstCar", _lstCar);
         forward("/admin/home.jsp", req, resp);
@@ -28,9 +38,7 @@ public class AdminHomeController extends MyServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        ArrayList<CarItem>  _lstCar = CarMapper.readCar();
-        req.setAttribute("_lstCar", _lstCar);
-        forward("/admin/home.jsp", req, resp);
+        doGet(req, resp);
     }
 
 }

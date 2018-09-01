@@ -25,10 +25,13 @@
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a class="navbar-brand" href="/home">Cars Today</a>
+                <a class="navbar-brand" href="/admin/home">Admin Mode</a>
             </div>
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="/login.jsp">User Mode</a></li>
+            </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="/login.jsp"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                <li><a href="/admin/login.jsp"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
             </ul>
         </div>
     </nav>
@@ -37,14 +40,12 @@
         <form action="/admin/login" method="post">
             <div class="form-group">
                 <label for="adminName">Admin Name:</label>
-                <input type="text" class="form-control" id="adminName" placeholder="Enter your admin name" name="adminName">
+                <input type="text" class="form-control" id="adminName" placeholder="Enter your admin name"
+                       name="adminName">
             </div>
             <div class="form-group">
                 <label for="pwd">Password:</label>
                 <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="password">
-            </div>
-            <div class="checkbox">
-                <label><input type="checkbox" name="remember"> Remember me</label>
             </div>
             <button type="submit" class="btn btn-default">Submit</button>
         </form>

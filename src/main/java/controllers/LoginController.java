@@ -27,7 +27,7 @@ public class LoginController extends MyServlet {
         HttpSession session = req.getSession();
         Object userIdInSession = session.getAttribute("userId");
         if (userIdInSession != null ){
-            forward("/home.jsp", req, resp);
+            forward("/home", req, resp);
         } else {
             forward("/login.jsp", req, resp);
         }
@@ -59,7 +59,7 @@ public class LoginController extends MyServlet {
                 session.setAttribute("userId", user.getUid());
                 session.setAttribute("userName", user.getUserName());
                 // navigate to home page
-                forward("/home.jsp", req, resp);
+                forward("/home", req, resp);
                 return;
             }
         }
