@@ -60,7 +60,7 @@ public class PurchaseController extends MyServlet {
         String address = req.getParameter("address");
         String phone = req.getParameter("phone");
 
-        Order order = new Order(userIdInSession, cid, address, phone);
+        Order order = new Order(cid, userIdInSession, address, phone);
 
         OrderMapper.createOrder(order);
 

@@ -42,6 +42,7 @@ public class OrderController extends MyServlet {
                     CarItem car = cached.get(carId);
                     // if it's not in cached
                     if (car == null) {
+                        System.out.println(carId);
                         car = CarMapper.readCarByID(""+carId).get(0);
                         cached.put(carId, car);
                     }
