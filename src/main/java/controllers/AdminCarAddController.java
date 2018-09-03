@@ -30,6 +30,23 @@ public class AdminCarAddController extends MyServlet {
             forward("/admin/login.jsp", req, resp);
         }
 
+        String priceString = req.getParameter("price");
+        String stockString = req.getParameter("stock");
+        int price, stock;
+        try {
+            price = Integer.parseInt(priceString);
+
+        } catch (Exception exception) {
+            price = 0;
+        }
+
+        try {
+            stock = Integer.parseInt(stockString);
+
+        } catch (Exception exception) {
+            stock = 0;
+        }
+
         CarItem _catItem = new CarItem();
         _catItem.setBrand(req.getParameter("brand"));
         _catItem.setCarType(req.getParameter("car_type"));
@@ -37,11 +54,11 @@ public class AdminCarAddController extends MyServlet {
         _catItem.setTransmission(req.getParameter("transmission"));
         _catItem.setEngineType(req.getParameter("engine_type"));
         _catItem.setImage(req.getParameter("image"));
-        _catItem.setPrice(Integer.parseInt(req.getParameter("price")));
+        _catItem.setPrice(price);
         _catItem.setLocation("");
         _catItem.setMilage(0);
         _catItem.setDescription(req.getParameter("description"));
-        _catItem.setStock(Integer.parseInt(req.getParameter("stock")));
+        _catItem.setStock(stock);
         CarMapper.createCar(_catItem);
         forward("/admin/home", req, resp);
     }

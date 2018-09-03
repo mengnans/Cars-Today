@@ -20,6 +20,8 @@ public class DBUtils {
     private static final String SERVER_NAME = "us-cdbr-iron-east-01.cleardb.net";
     private static final String PORT_NUMBER = "3306";
     private static final String DB_NAME = "heroku_f7f811610f984f9";
+    public static final String MYSQL_AUTO_RECONNECT = "autoReconnect";
+    public static final String MYSQL_MAX_RECONNECTS = "maxReconnects";
 
 //    mysql://b357bae083caf3:048b8249@us-cdbr-iron-east-01.cleardb.net/heroku_f7f811610f984f9?reconnect=true
 
@@ -33,12 +35,15 @@ public class DBUtils {
             Properties connectionProps = new Properties();
             connectionProps.put("user", USER_NAME);
             connectionProps.put("password", PASSWORD);
+            connectionProps.put(MYSQL_AUTO_RECONNECT, "true");
+            connectionProps.put(MYSQL_MAX_RECONNECTS, "100");
 
             try {
                 Class.forName("com.mysql.jdbc.Driver");
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
             }
+
 
             conn = DriverManager.getConnection(
                     "jdbc:" + DBMS + "://" +
