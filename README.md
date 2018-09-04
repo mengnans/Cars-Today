@@ -1,12 +1,10 @@
 ## Description
-This is the repo for Mengnan Shi and Ye Yan for the uni project called "Westores Today".
+This is the repo for Mengnan Shi and Ye Yan for the uni project called "Cars Today".
 
-Westeros is a continent described in the book Game of Thrones written by George R.R. Martin. Most actions in Game of Thrones take place in Westeros.
+Cars Today is a website for users to buy brand new cars or second-hand cars. Registered sellers can also sell their cars on our website.
 
-Westeros Today is the first web-based forum for the citizens of Westeros. It is used for the citizens to:
+We have designed different views for users and administrators, and they can be switched by the nav bar on the top.
 
-* post their information; 
-* reply to other’s threads;
-* get the latest news.
+**Note that:**  The initial super admin name is **root**, and password is **5314**.
 
 

@@ -1,13 +1,9 @@
 package controllers;
 
-import com.sun.deploy.net.HttpRequest;
 import dataAccess.CarMapper;
 import dataAccess.OrderMapper;
-import dataAccess.UserMapper;
 import models.CarItem;
 import models.Order;
-import models.User;
-import utils.Utils;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
