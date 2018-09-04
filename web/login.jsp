@@ -28,11 +28,11 @@
                 <a class="navbar-brand" href="/home">Cars Today</a>
             </div>
             <ul class="nav navbar-nav">
-                <li class="active"><a href="/admin/login.jsp">Admin Mode</a></li>
+                <li class="active"><a href="/admin/login">Admin Mode</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="/sign-up.jsp"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-                <li><a href="/login.jsp"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
             </ul>
         </div>
     </nav>

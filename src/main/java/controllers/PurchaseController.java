@@ -49,22 +49,44 @@ public class PurchaseController extends MyServlet {
         }
 
         Long cid = Long.valueOf(req.getParameter("cid"));
+
+        boolean purchaseStatus = purchaseCar(cid);
+
+        if (purchaseStatus == true){
+            String address = req.getParameter("address");
+            String phone = req.getParameter("phone");
+
+            Order order = new Order(cid, userIdInSession, address, phone);
+
+            OrderMapper.createOrder(order);
+
+            forward("/order?purchase=success", req, resp);
+        } else {
+            req.setAttribute("error","Sorry, the car you are buying is sold out");
+
+            forward("/error.jsp", req, resp);
+        }
+
+
+    }
+
+    /**
+     * synchronized method makes sure only one thread is accessing the
+     * stock of the car, and update it.
+     * This can make sure, if there's only one car, two buyers cannot
+     * buy it at the same time.
+     * @param cid the id of the car
+     * @return whether the purchase is successful or not
+     */
+    private synchronized boolean purchaseCar(Long cid) {
         CarItem car = CarMapper.readCarByID(""+cid).get(0);
         int carStock = car.getStock();
         if (carStock >= 1){
             car.setStock(carStock - 1);
+            CarMapper.updateCar(car);
+            return true;
+        } else {
+            return false;
         }
-
-        // update stock here
-
-        String address = req.getParameter("address");
-        String phone = req.getParameter("phone");
-
-        Order order = new Order(cid, userIdInSession, address, phone);
-
-        OrderMapper.createOrder(order);
-
-        forward("/order", req, resp);
-
     }
 }

@@ -31,6 +31,17 @@ public class OrderController extends MyServlet {
         if (userIdInSession != null) {
             ArrayList<Order> orders = OrderMapper.readAllOrdersByUserId((Long) userIdInSession);
 
+            String purchaseStatus = req.getParameter("purchase");
+            if (purchaseStatus != null && purchaseStatus.equals("success")) {
+                req.setAttribute("order_info",
+                        "Payment Success, please come back later to check the status of the order");
+            } else {
+                // set empty purchase_
+                req.setAttribute("order_info",
+                        "We are taking care of your orders, please come back later to check the status of the order");
+            }
+
+            // get cached car item data
             HashMap<Long, CarItem> cached = (HashMap<Long, CarItem>) session.getAttribute("cached");
             if (cached == null) {
                 cached = new HashMap<Long, CarItem>();
@@ -43,7 +54,7 @@ public class OrderController extends MyServlet {
                     // if it's not in cached
                     if (car == null) {
                         System.out.println(carId);
-                        car = CarMapper.readCarByID(""+carId).get(0);
+                        car = CarMapper.readCarByID("" + carId).get(0);
                         cached.put(carId, car);
                     }
                     myOrder.setCar(car);

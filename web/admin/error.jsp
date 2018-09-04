@@ -28,10 +28,10 @@
                 <a class="navbar-brand" href="/admin/home">Admin Mode</a>
             </div>
             <ul class="nav navbar-nav">
-                <li class="active"><a href="/login.jsp">User Mode</a></li>
+                <li class="active"><a href="/login">User Mode</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="/admin/login.jsp"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                <li><a href="/admin/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
             </ul>
         </div>
     </nav>

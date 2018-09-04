@@ -57,7 +57,7 @@ public class AdminCarEditController extends MyServlet {
         _catItem.setEngineType(req.getParameter("engine_type"));
         _catItem.setImage(req.getParameter("image"));
         _catItem.setPrice(price);
-        _catItem.setLocation("");
+        _catItem.setLocation(req.getParameter("location"));
         _catItem.setMilage(0);
         _catItem.setDescription(req.getParameter("description"));
         _catItem.setStock(stock);

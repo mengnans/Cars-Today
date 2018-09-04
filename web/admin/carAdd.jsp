@@ -27,7 +27,7 @@
             <a class="navbar-brand" href="/admin/home">Admin Mode</a>
         </div>
         <ul class="nav navbar-nav">
-            <li class="active"><a href="/login.jsp">User Mode</a></li>
+            <li class="active"><a href="/login">User Mode</a></li>
         </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="/admin/logout"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
@@ -79,6 +79,11 @@
                 <label for="description">Description:</label>
                 <input type="text" class="form-control" id="description" placeholder="Enter the Description"
                        name="description">
+            </div>
+
+            <div class="form-group">
+                <label for="location">Location:</label>
+                <input type="text" class="form-control" id="location" placeholder="Enter the Location" name="location">
             </div>
 
             <div class="form-group">

@@ -28,15 +28,18 @@
                 <a class="navbar-brand" href="/admin/home">Admin Mode</a>
             </div>
             <ul class="nav navbar-nav">
-                <li class="active"><a href="/login.jsp">User Mode</a></li>
+                <li class="active"><a href="/login">User Mode</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="/admin/login.jsp"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                <li><a href="/admin/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
             </ul>
         </div>
     </nav>
 
     <div class="container-fluid my-form">
+        <div class="alert alert-info">
+            <strong>Tip:</strong> The admin name and password are written in our report's instruction section.
+        </div>
         <form action="/admin/login" method="post">
             <div class="form-group">
                 <label for="adminName">Admin Name:</label>
@@ -48,6 +51,7 @@
                 <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="password">
             </div>
             <button type="submit" class="btn btn-default">Submit</button>
+            <br/>
         </form>
 
     </div>

@@ -84,7 +84,13 @@ public class CarMapper {
         return ConvertQueryResultToCarDetailedItem(resultSet);
     }
 
-    public static void updateCar(CarItem carItem) {
+    /**
+     * synchronized method makes sure only one thread can update the
+     * data
+     * @param carItem carItem object, which contains all the info
+     *                for the car
+     */
+    public synchronized static void updateCar(CarItem carItem) {
         String _sql = "UPDATE cars SET " +
                 "brand= '" + carItem.getBrand() + "', " +
                 "car_type= '" + carItem.getCarType() + "', " +

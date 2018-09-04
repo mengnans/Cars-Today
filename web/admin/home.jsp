@@ -29,7 +29,7 @@
             <a class="navbar-brand" href="/admin/home">Admin Mode</a>
         </div>
         <ul class="nav navbar-nav">
-            <li class="active"><a href="/login.jsp">User Mode</a></li>
+            <li class="active"><a href="/login">User Mode</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
             <li><a href="/admin/logout"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
@@ -49,12 +49,13 @@
                 <img src="${_item.getImage()}" style="width:25vw;">
             </div>
             <div class="col-sm-6">
-                    ${_item.getCarName()}
+                    ${_item.getBrand()} ${_item.getCarName()}
                 <ul>
                     <li>Brand: ${_item.getBrand()}</li>
                     <li>CarType: ${_item.getCarType()}</li>
                     <li>Transmission: ${_item.getTransmission()}</li>
                     <li>Only $${_item.getPrice()}</li>
+                    <li>Only ${_item.getStock()} left</li>
                 </ul>
             </div>
             <div class="col-sm-2">

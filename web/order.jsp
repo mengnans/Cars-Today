@@ -30,7 +30,7 @@
                 <a class="navbar-brand" href="/home">Cars Today</a>
             </div>
             <ul class="nav navbar-nav">
-                <li class="active"><a href="/admin/login.jsp">Admin Mode</a></li>
+                <li class="active"><a href="/admin/login">Admin Mode</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="/order"><span class="glyphicon glyphicon-user"></span> My Orders</a></li>
@@ -40,6 +40,10 @@
     </nav>
 
     <div class="container-fluid my-content">
+
+        <div class="alert alert-info">
+            ${requestScope.get("order_info")}
+        </div>
 
         <c:forEach items="${orders}" var="order">
             <a href="/detail?cid=${order.getCarId()}">

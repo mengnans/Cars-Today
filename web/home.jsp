@@ -29,7 +29,7 @@
             <a class="navbar-brand" href="/admin/home">Cars Today</a>
         </div>
         <ul class="nav navbar-nav">
-            <li class="active"><a href="/admin/login.jsp">Admin Mode</a></li>
+            <li class="active"><a href="/admin/login">Admin Mode</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
             <li><a href="/order"><span class="glyphicon glyphicon-user"></span> My Orders</a></li>
@@ -49,16 +49,16 @@
     <c:forEach items="${_lstCar}" var="_item">
         <div class="row" style="border: 1px solid grey;">
             <div class="col-sm-4">
-                    <%--<a href="car?id=${_item.getCarId()}"> ${_item.getCarName()} </a>--%>
                 <img src="${_item.getImage()}" style="width:25vw;">
             </div>
             <div class="col-sm-8">
-                <a href="detail?cid=${_item.getCarId()}"> ${_item.getCarName()} </a>
+                <a href="detail?cid=${_item.getCarId()}"> ${_item.getBrand()} ${_item.getCarName()}</a>
                 <ul>
                     <li>Brand: ${_item.getBrand()}</li>
                     <li>CarType: ${_item.getCarType()}</li>
                     <li>Transmission: ${_item.getTransmission()}</li>
                     <li>Only $${_item.getPrice()}</li>
+                    <li>Only ${_item.getStock()} left</li>
                 </ul>
             </div>
         </div>
