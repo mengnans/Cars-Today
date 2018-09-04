@@ -94,7 +94,8 @@
 
             <div class="form-group">
                 <label for="location">Location:</label>
-                <input type="text" class="form-control" id="location" placeholder="Enter the Location" name="location">
+                <input type="text" class="form-control" id="location" placeholder="Enter the Location" name="location"
+                       value="<%=((CarItem) request.getAttribute("car")).getLocation()%>">
             </div>
 
             <div class="form-group">

@@ -103,7 +103,6 @@ public class CarMapper {
                 "location= '" + carItem.getLocation() + "', " +
                 "milage= '" + carItem.getMilage() + "', " +
                 "description= '" + carItem.getDescription() + "', " +
-
                 "stock= '" + carItem.getStock() + "'  " +
                 "WHERE cars_id = " + "'" + carItem.getCarId() + "'";
         ExecuteNonQuerySql(_sql);
