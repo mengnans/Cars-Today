@@ -32,7 +32,6 @@ public class AdminCarDeleteController extends MyServlet {
         String _id = req.getParameter("id");
         ArrayList<CarItem> _lstCar = CarMapper.readCarByID(_id);
         for (int i = 0; i < _lstCar.size(); i++) {
-//            CarMapper.deleteCar(_lstCar.get(i));
             // instead of deleting the car directly
             // we set the stock of car 0
             _lstCar.get(i).setStock(0);

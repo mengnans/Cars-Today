@@ -41,12 +41,9 @@ public class AdminCarEditController extends MyServlet {
 
         try {
             stock = Integer.parseInt(stockString);
-
         } catch (Exception exception) {
             stock = 0;
         }
-
-
 
         CarItem _catItem = new CarItem();
         _catItem.setCarId(Long.parseLong(req.getParameter("cars_id")));

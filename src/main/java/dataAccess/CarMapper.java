@@ -2,6 +2,7 @@ package dataAccess;
 
 import models.CarItem;
 
+import javax.xml.stream.FactoryConfigurationError;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -21,7 +22,8 @@ public class CarMapper {
      * @param carItem
      */
     public static void createCar(CarItem carItem) {
-        String _sql = "INSERT INTO cars (brand,car_type,car_name,transmission,engine_type,image,price,seller_id,location,milage,description,stock) VALUES('"
+        String _sql = "INSERT INTO cars (version,brand,car_type,car_name,transmission,engine_type,image,price,seller_id,location,milage,description,stock) VALUES('"
+                + carItem.getVersion() + "', '"
                 + carItem.getBrand() + "', '"
                 + carItem.getCarType() + "', '"
                 + carItem.getCarName() + "', '"
@@ -43,7 +45,7 @@ public class CarMapper {
      * @return an array list that contains all CarItem objects
      */
     public static ArrayList<CarItem> readCar() {
-        String _sql = "SELECT * FROM cars";
+        String _sql = "SELECT * FROM cars where stock > 0";
         ResultSet resultSet = ExecuteQuerySql(_sql);
         return ConvertQueryResultToCarDetailedItem(resultSet);
     }
@@ -54,7 +56,7 @@ public class CarMapper {
      * @return an array list that contains all CarItem objects
      */
     public static ArrayList<CarItem> readCarByID(String argID) {
-        String _sql = "SELECT * FROM cars WHERE cars_id='"+argID+"'";
+        String _sql = "SELECT * FROM cars WHERE cars_id='" + argID + "'";
         ResultSet resultSet = ExecuteQuerySql(_sql);
         return ConvertQueryResultToCarDetailedItem(resultSet);
     }
@@ -87,11 +89,16 @@ public class CarMapper {
     /**
      * synchronized method makes sure only one thread can update the
      * data
+     *
      * @param carItem carItem object, which contains all the info
      *                for the car
      */
-    public synchronized static void updateCar(CarItem carItem) {
+    public synchronized static boolean updateCar(CarItem carItem) {
+        ArrayList<CarItem> _lstCar = readCarByID(carItem.getCarId() + "");
+        if (_lstCar.get(0).getVersion() != carItem.getVersion()) return false;
+
         String _sql = "UPDATE cars SET " +
+                "version= '" + (carItem.getVersion() + 1) + "', " +
                 "brand= '" + carItem.getBrand() + "', " +
                 "car_type= '" + carItem.getCarType() + "', " +
                 "car_name= '" + carItem.getCarName() + "', " +
@@ -106,6 +113,7 @@ public class CarMapper {
                 "stock= '" + carItem.getStock() + "'  " +
                 "WHERE cars_id = " + "'" + carItem.getCarId() + "'";
         ExecuteNonQuerySql(_sql);
+        return true;
     }
 
     /**
@@ -123,6 +131,7 @@ public class CarMapper {
         try {
             while (argResultSet.next()) {
                 CarItem _carItem = new CarItem();
+                _carItem.setVersion(argResultSet.getInt("version"));
                 _carItem.setCarId(argResultSet.getLong("cars_id"));
                 _carItem.setBrand(argResultSet.getString("brand"));
                 _carItem.setCarType(argResultSet.getString("car_type"));

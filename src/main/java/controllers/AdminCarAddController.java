@@ -48,6 +48,7 @@ public class AdminCarAddController extends MyServlet {
         }
 
         CarItem _catItem = new CarItem();
+        _catItem.setVersion(0);
         _catItem.setBrand(req.getParameter("brand"));
         _catItem.setCarType(req.getParameter("car_type"));
         _catItem.setCarName(req.getParameter("car_name"));

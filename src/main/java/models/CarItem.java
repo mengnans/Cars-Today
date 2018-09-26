@@ -7,6 +7,8 @@ package models;
 
 public class CarItem {
 
+    private int version;
+
     private long carId;
 
     private String brand;
@@ -25,44 +27,11 @@ public class CarItem {
 
     public CarItem() { }
 
-    public CarItem(long carId, String brand, String carType, String carName, String transmission, String engineType, String image, int price, long sellerId, String location, int milage, String description, int stock) {
-        this.carId = carId;
-        this.brand = brand;
-        this.carType = carType;
-        this.carName = carName;
-        this.transmission = transmission;
-        this.engineType = engineType;
-        this.image = image;
-        this.price = price;
-        this.sellerId = sellerId;
-        this.location = location;
-        this.milage = milage;
-        this.description = description;
-        this.stock = stock;
-    }
+    public int getVersion() { return version; }
 
-    public CarItem(String brand, String carType, String carName, String transmission, String engineType, String image, int price, long sellerId, String location, int milage, String description, int stock) {
-        this.brand = brand;
-        this.carType = carType;
-        this.carName = carName;
-        this.transmission = transmission;
-        this.engineType = engineType;
-        this.image = image;
-        this.price = price;
-        this.sellerId = sellerId;
-        this.location = location;
-        this.milage = milage;
-        this.description = description;
-        this.stock = stock;
-    }
+    public long getCarId() { return carId; }
 
-    public long getCarId() {
-        return carId;
-    }
-
-    public String getBrand() {
-        return brand;
-    }
+    public String getBrand() { return brand; }
 
     public String getCarType() {
         return carType;
@@ -108,6 +77,8 @@ public class CarItem {
         return stock;
     }
 
+
+    public void setVersion(int version) { this.version = version; }
 
     public void setCarId(long carId) {
         this.carId = carId;
