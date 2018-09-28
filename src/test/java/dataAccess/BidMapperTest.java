@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 /**
  * @author Mengnan Shi
- * @create 2018-08-21-19:08
+ * @create 2018-09-28-19:08
  */
 
 public class BidMapperTest {
