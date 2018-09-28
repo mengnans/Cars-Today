@@ -71,9 +71,10 @@ public class OrderMapper {
 
 
     /**
-     * create a new order
+     * update a new order
      *
-     * @param order a new order
+     * @param order a order object that contains all the
+     *              info for the new bid object
      */
     public static void updateOrder(Order order) {
         String sql = "UPDATE orders SET status = ? where oid = ?";
