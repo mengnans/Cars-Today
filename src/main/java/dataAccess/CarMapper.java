@@ -51,6 +51,17 @@ public class CarMapper {
     }
 
     /**
+     * find all cars and store the data in a CarItem object
+     *
+     * @return an array list that contains all CarItem objects
+     */
+    public static ArrayList<CarItem> readUserUsedCar(String argUserId) {
+        String _sql = "SELECT * FROM cars where seller_id='" + argUserId + "'";
+        ResultSet resultSet = ExecuteQuerySql(_sql);
+        return ConvertQueryResultToCarDetailedItem(resultSet);
+    }
+
+    /**
      * find cars and store the data in a CarItem object
      *
      * @return an array list that contains all CarItem objects

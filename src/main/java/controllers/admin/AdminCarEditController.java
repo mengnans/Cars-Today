@@ -1,5 +1,6 @@
-package controllers;
+package controllers.admin;
 
+import controllers.MyServlet;
 import dataAccess.CarMapper;
 import models.CarItem;
 
@@ -9,15 +10,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.ArrayList;
 
 /**
  * @author Ye Yan
  * @create 2018-8-28 20:51:00
  */
 
-@WebServlet("/admin/car/add")
-public class AdminCarAddController extends MyServlet {
+@WebServlet("/admin/car/edit")
+public class AdminCarEditController extends MyServlet {
     private static final long serialVersionUID = 1L;
 
     @Override
@@ -26,7 +26,7 @@ public class AdminCarAddController extends MyServlet {
         // if admin didn't log in
         HttpSession session = req.getSession();
         Object adminIdInSession = session.getAttribute("adminId");
-        if (adminIdInSession == null ){
+        if (adminIdInSession == null) {
             forward("/admin/login.jsp", req, resp);
         }
 
@@ -42,13 +42,12 @@ public class AdminCarAddController extends MyServlet {
 
         try {
             stock = Integer.parseInt(stockString);
-
         } catch (Exception exception) {
             stock = 0;
         }
 
         CarItem _catItem = new CarItem();
-        _catItem.setVersion(0);
+        _catItem.setCarId(Long.parseLong(req.getParameter("cars_id")));
         _catItem.setBrand(req.getParameter("brand"));
         _catItem.setCarType(req.getParameter("car_type"));
         _catItem.setCarName(req.getParameter("car_name"));
@@ -60,7 +59,7 @@ public class AdminCarAddController extends MyServlet {
         _catItem.setMilage(0);
         _catItem.setDescription(req.getParameter("description"));
         _catItem.setStock(stock);
-        CarMapper.createCar(_catItem);
+        CarMapper.updateCar(_catItem);
         forward("/admin/home", req, resp);
     }
 

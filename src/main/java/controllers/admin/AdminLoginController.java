@@ -1,5 +1,6 @@
-package controllers;
+package controllers.admin;
 
+import controllers.MyServlet;
 import dataAccess.AdminMapper;
 import models.Administrator;
 import utils.Utils;
