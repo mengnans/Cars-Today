@@ -28,7 +28,7 @@ public class HomeController extends MyServlet {
         // if user didn't log in
         HttpSession session = req.getSession();
         Object userIdInSession = session.getAttribute("userId");
-        if (userIdInSession == null ){
+        if (userIdInSession == null) {
             forward("/login.jsp", req, resp);
         }
 
