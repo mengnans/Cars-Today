@@ -25,19 +25,19 @@
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a class="navbar-brand" href="/admin/home">Admin Mode</a>
+                <a class="navbar-brand" href="/home">Admin Mode</a>
             </div>
             <ul class="nav navbar-nav">
                 <li class="active"><a href="/login">User Mode</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="/admin/logout"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+                <li><a href="/logout"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
             </ul>
     </div>
     </nav>
 
     <div class="container-fluid my-form" style="margin-top: 64px">
-        <form action="/admin/car/edit" method="post">
+        <form action="/user/car/edit" method="post">
 
             <div class="form-group">
                 <input type="hidden" class="form-control" id="cars_id" placeholder="Enter the Brand" name="cars_id"
@@ -104,9 +104,12 @@
             </div>
 
             <div class="form-group">
-                <label for="stock">Stock:</label>
-                <input type="text" class="form-control" id="stock" placeholder="Enter the Stock" name="stock"
-                       value="<%=((CarItem) request.getAttribute("car")).getStock()%>">
+                <input type="hidden" class="form-control" id="stock" placeholder="Enter the Stock" name="stock" value="1">
+            </div>
+
+            <div class="form-group">
+                <input type="hidden" class="form-control" id="seller_id" placeholder="Enter the Stock" name="seller_id"
+                       value=<%=(request.getAttribute("userId"))%>>
             </div>
 
             <button type="submit" class="btn btn-default">Submit</button>

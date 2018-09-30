@@ -13,11 +13,11 @@ import java.io.IOException;
 
 /**
  * @author Ye Yan
- * @create 2018-9-29 21:04:39
+ * @create 2018-9-30 08:27:06
  */
 
-@WebServlet("/user/car/add")
-public class UserCarAddController extends MyServlet {
+@WebServlet("/user/car/edit")
+public class UserCarEditController extends MyServlet {
     private static final long serialVersionUID = 1L;
 
     @Override
@@ -61,7 +61,8 @@ public class UserCarAddController extends MyServlet {
         }
 
         CarItem _catItem = new CarItem();
-        _catItem.setVersion(0);
+        _catItem.setVersion(Integer.parseInt(req.getParameter("version")));
+        _catItem.setCarId(Long.parseLong(req.getParameter("cars_id")));
         _catItem.setBrand(req.getParameter("brand"));
         _catItem.setCarType(req.getParameter("car_type"));
         _catItem.setCarName(req.getParameter("car_name"));
@@ -74,7 +75,7 @@ public class UserCarAddController extends MyServlet {
         _catItem.setDescription(req.getParameter("description"));
         _catItem.setStock(stock);
         _catItem.setSellerId(seller_id);
-        CarMapper.createCar(_catItem);
+        CarMapper.updateCar(_catItem);
         forward("/user/home", req, resp);
     }
 

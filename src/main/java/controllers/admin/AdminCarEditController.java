@@ -47,6 +47,7 @@ public class AdminCarEditController extends MyServlet {
         }
 
         CarItem _catItem = new CarItem();
+        _catItem.setVersion(Integer.parseInt(req.getParameter("version")));
         _catItem.setCarId(Long.parseLong(req.getParameter("cars_id")));
         _catItem.setBrand(req.getParameter("brand"));
         _catItem.setCarType(req.getParameter("car_type"));
