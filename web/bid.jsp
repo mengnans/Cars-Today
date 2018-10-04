@@ -20,7 +20,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
     <link rel="stylesheet" href="styles/bid.css"/>
-    <title>${car.carName}</title>
+    <title>My Bid</title>
 </head>
 <body>
 <div>

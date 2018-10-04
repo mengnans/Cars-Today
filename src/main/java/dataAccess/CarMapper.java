@@ -45,7 +45,7 @@ public class CarMapper {
      * @return an array list that contains all CarItem objects
      */
     public static ArrayList<CarItem> readCar() {
-        String _sql = "SELECT * FROM cars where stock > 0";
+        String _sql = "SELECT * FROM cars where stock > 0 order by cars_id desc";
         ResultSet resultSet = ExecuteQuerySql(_sql);
         return ConvertQueryResultToCarDetailedItem(resultSet);
     }
@@ -56,7 +56,7 @@ public class CarMapper {
      * @return an array list that contains all CarItem objects
      */
     public static ArrayList<CarItem> readUserUsedCar(String argUserId) {
-        String _sql = "SELECT * FROM cars where seller_id='" + argUserId + "'";
+        String _sql = "SELECT * FROM cars where seller_id='" + argUserId + "' order by cars_id desc";
         ResultSet resultSet = ExecuteQuerySql(_sql);
         return ConvertQueryResultToCarDetailedItem(resultSet);
     }
