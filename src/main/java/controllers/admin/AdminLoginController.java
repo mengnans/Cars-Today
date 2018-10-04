@@ -1,6 +1,7 @@
 package controllers.admin;
 
 import controllers.MyServlet;
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import utils.AuthenticationEnforcer;
 
@@ -35,6 +36,7 @@ public class AdminLoginController extends MyServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String adminName = req.getParameter("adminName");
         String pwd = req.getParameter("password");
+
 
         boolean _isSuccess =  AuthenticationEnforcer.VerifyAdmin(adminName, pwd);
 
