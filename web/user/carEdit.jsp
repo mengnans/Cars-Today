@@ -104,6 +104,12 @@
             </div>
 
             <div class="form-group">
+                <label for="location">Milage:</label>
+                <input type="text" class="form-control" id="milage" placeholder="Enter the Milage" name="milage"
+                       value="<%=((CarItem) request.getAttribute("car")).getMilage()%>">
+            </div>
+
+            <div class="form-group">
                 <input type="hidden" class="form-control" id="stock" placeholder="Enter the Stock" name="stock" value="1">
             </div>
 

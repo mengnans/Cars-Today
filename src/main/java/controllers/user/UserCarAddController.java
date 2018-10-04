@@ -38,18 +38,30 @@ public class UserCarAddController extends MyServlet {
         int price, stock, milage, seller_id;
         try {
             price = Integer.parseInt(priceString);
+            if (price < 0) {
+                forward("/user/home", req, resp);
+                return;
+            }
         } catch (Exception exception) {
             price = 0;
         }
 
         try {
             stock = Integer.parseInt(stockString);
+            if (stock < 0) {
+                forward("/user/home", req, resp);
+                return;
+            }
         } catch (Exception exception) {
             stock = 0;
         }
 
         try {
             milage = Integer.parseInt(milageString);
+            if (milage < 0) {
+                forward("/user/home", req, resp);
+                return;
+            }
         } catch (Exception exception) {
             milage = 0;
         }
