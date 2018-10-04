@@ -23,7 +23,7 @@
     <title>My Bid</title>
 </head>
 <body>
-<div>
+<div class="my-bid">
     <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container-fluid">
             <div class="navbar-header">

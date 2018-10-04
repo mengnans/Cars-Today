@@ -50,6 +50,44 @@ public class BidMapper {
         return null;
     }
 
+    /**
+     * find all bids for a car
+     *
+     * @return an array list that contains all bids
+     * for that user
+     */
+    public static ArrayList<Bid> readAllBidsByCarId(Long cId) {
+        String sql = "SELECT * FROM bids where cars_id = ? order by bid desc";
+        Connection conn = null;
+        try {
+            conn = DBUtils.getConnection();
+            PreparedStatement preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setLong(1, cId);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            ArrayList<Bid> bids = new ArrayList<Bid>();
+
+            while (resultSet.next()) {
+                Long bId = resultSet.getLong("bid");
+                Long carId = resultSet.getLong("cars_id");
+                Long userId = resultSet.getLong("user_id");
+                String address = resultSet.getString("address");
+                String phone = resultSet.getString("phone");
+                String status = resultSet.getString("status");
+                Date date = resultSet.getDate("date");
+                double bidPrice = resultSet.getDouble("bid_price");
+                Bid bid = new Bid(bId, carId, userId, address, phone, status, date, bidPrice);
+                bids.add(bid);
+            }
+
+            return bids;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 
     /**
      * update a bid

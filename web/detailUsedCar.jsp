@@ -73,7 +73,7 @@
             </div>
 
         <div class="button-box">
-            <a class="btn btn-primary my-button" href="/purchase?cid=${car.carId}" role="button">Bid Now</a>
+            <a class="btn btn-primary my-button" href="/add-bid?cid=${car.carId}" role="button">Bid Now</a>
         </div>
     </div>
 
