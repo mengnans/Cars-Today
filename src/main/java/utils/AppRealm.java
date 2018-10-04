@@ -11,12 +11,12 @@ public class AppRealm extends JdbcRealm {
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
         UsernamePasswordToken _token = (UsernamePasswordToken) token;
         String _username = _token.getUsername();
-        if (_username == "root") {
+        if (_username.equals("root")) {
             return new SimpleAuthenticationInfo("root", "5314", "Admin");
         } else {
             User _user = UserMapper.readUserByUserName(_username);
             if (_user == null) return null;
-            return new SimpleAuthenticationInfo(_username, _user.getPassword(), "nuser");
+            return new SimpleAuthenticationInfo(_username, _user.getPassword(), "user");
         }
     }
 }

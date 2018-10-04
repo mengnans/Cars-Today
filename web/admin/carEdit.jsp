@@ -33,7 +33,7 @@
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="/admin/logout"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
             </ul>
-    </div>
+        </div>
     </nav>
 
     <div class="container-fluid my-form" style="margin-top: 64px">
@@ -87,8 +87,8 @@
 
             <div class="form-group">
                 <label for="price">Price:</label>
-                <input type="text" class="form-control" id="price" placeholder="Enter the Price" name="price"
-                       value="<%=((CarItem) request.getAttribute("car")).getPrice()%>">
+                <input type="number" class="form-control" id="price" placeholder="Enter the Price" name="price"
+                       value="<%=((CarItem) request.getAttribute("car")).getPrice()%>" min="0" max="100000000">
             </div>
 
             <div class="form-group">
@@ -105,8 +105,8 @@
 
             <div class="form-group">
                 <label for="stock">Stock:</label>
-                <input type="text" class="form-control" id="stock" placeholder="Enter the Stock" name="stock"
-                       value="<%=((CarItem) request.getAttribute("car")).getStock()%>">
+                <input type="number" class="form-control" id="stock" placeholder="Enter the Stock" name="stock"
+                       value="<%=((CarItem) request.getAttribute("car")).getStock()%>" min="0" max="10000">
             </div>
 
             <button type="submit" class="btn btn-default">Submit</button>

@@ -29,71 +29,73 @@
         <ul class="nav navbar-nav">
             <li class="active"><a href="/login">User Mode</a></li>
         </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="/admin/logout"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
-            </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="/admin/logout"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+        </ul>
+</div>
+</nav>
+
+<div class="container-fluid my-form" style="margin-top: 64px">
+    <form action="/admin/car/add" method="post">
+
+        <div class="form-group">
+            <label for="brand">Brand:</label>
+            <input type="text" class="form-control" id="brand" placeholder="Enter the Brand" name="brand">
         </div>
-    </nav>
 
-    <div class="container-fluid my-form" style="margin-top: 64px">
-        <form action="/admin/car/add" method="post">
+        <div class="form-group">
+            <label for="car_type">Car Type:</label>
+            <input type="text" class="form-control" id="car_type" placeholder="Enter the Car Type" name="car_type">
+        </div>
 
-            <div class="form-group">
-                <label for="brand">Brand:</label>
-                <input type="text" class="form-control" id="brand" placeholder="Enter the Brand" name="brand">
-            </div>
+        <div class="form-group">
+            <label for="car_name">Car Name:</label>
+            <input type="text" class="form-control" id="car_name" placeholder="Enter the Car Name" name="car_name">
+        </div>
 
-            <div class="form-group">
-                <label for="car_type">Car Type:</label>
-                <input type="text" class="form-control" id="car_type" placeholder="Enter the Car Type" name="car_type">
-            </div>
+        <div class="form-group">
+            <label for="transmission">Transmission:</label>
+            <input type="text" class="form-control" id="transmission" placeholder="Enter the Transmission"
+                   name="transmission">
+        </div>
 
-            <div class="form-group">
-                <label for="car_name">Car Name:</label>
-                <input type="text" class="form-control" id="car_name" placeholder="Enter the Car Name" name="car_name">
-            </div>
+        <div class="form-group">
+            <label for="engine_type">Engine Type:</label>
+            <input type="text" class="form-control" id="engine_type" placeholder="Enter the Engine Type"
+                   name="engine_type">
+        </div>
 
-            <div class="form-group">
-                <label for="transmission">Transmission:</label>
-                <input type="text" class="form-control" id="transmission" placeholder="Enter the Transmission"
-                       name="transmission">
-            </div>
+        <div class="form-group">
+            <label for="image">Image:</label>
+            <input type="text" class="form-control" id="image" placeholder="Enter the Image" name="image">
+        </div>
 
-            <div class="form-group">
-                <label for="engine_type">Engine Type:</label>
-                <input type="text" class="form-control" id="engine_type" placeholder="Enter the Engine Type"
-                       name="engine_type">
-            </div>
+        <div class="form-group">
+            <label for="price">Price:</label>
+            <input type="number" class="form-control" id="price" placeholder="Enter the Price" name="price" min="0"
+                   max="100000000">
+        </div>
 
-            <div class="form-group">
-                <label for="image">Image:</label>
-                <input type="text" class="form-control" id="image" placeholder="Enter the Image" name="image">
-            </div>
+        <div class="form-group">
+            <label for="description">Description:</label>
+            <input type="text" class="form-control" id="description" placeholder="Enter the Description"
+                   name="description">
+        </div>
 
-            <div class="form-group">
-                <label for="price">Price:</label>
-                <input type="text" class="form-control" id="price" placeholder="Enter the Price" name="price">
-            </div>
+        <div class="form-group">
+            <label for="location">Location:</label>
+            <input type="text" class="form-control" id="location" placeholder="Enter the Location" name="location">
+        </div>
 
-            <div class="form-group">
-                <label for="description">Description:</label>
-                <input type="text" class="form-control" id="description" placeholder="Enter the Description"
-                       name="description">
-            </div>
+        <div class="form-group">
+            <label for="stock">Stock:</label>
+            <input type="number" class="form-control" id="stock" placeholder="Enter the Stock" name="stock" min="0"
+                   max="10000">
+        </div>
 
-            <div class="form-group">
-                <label for="location">Location:</label>
-                <input type="text" class="form-control" id="location" placeholder="Enter the Location" name="location">
-            </div>
-
-            <div class="form-group">
-                <label for="stock">Stock:</label>
-                <input type="text" class="form-control" id="stock" placeholder="Enter the Stock" name="stock">
-            </div>
-
-            <button type="submit" class="btn btn-default">Submit</button>
-        </form>
-    </div>
+        <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+</div>
 
 
 </div>

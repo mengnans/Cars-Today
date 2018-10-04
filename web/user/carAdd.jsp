@@ -72,7 +72,8 @@
 
         <div class="form-group">
             <label for="price">Price:</label>
-            <input type="text" class="form-control" id="price" placeholder="Enter the Price" name="price">
+            <input type="number" class="form-control" id="price" placeholder="Enter the Price" name="price" min="0"
+                   max="100000000">
         </div>
 
         <div class="form-group">
@@ -87,8 +88,9 @@
         </div>
 
         <div class="form-group">
-            <label for="location">Milage:</label>
-            <input type="text" class="form-control" id="milage" placeholder="Enter the Milage" name="milage">
+            <label for="location">Mileage:</label>
+            <input type="number" class="form-control" id="milage" placeholder="Enter the Milage" name="milage" min="0"
+                   max="1000000">
         </div>
 
         <div class="form-group">
