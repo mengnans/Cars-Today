@@ -3,6 +3,7 @@ package controllers;
 import dataAccess.UserMapper;
 import models.User;
 import utils.AuthenticationEnforcer;
+import utils.InterceptingValidator;
 import utils.Utils;
 
 import javax.servlet.ServletException;
@@ -37,6 +38,7 @@ public class LoginController extends MyServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String userName = req.getParameter("userName");
         String pwd = req.getParameter("password");
+        pwd = InterceptingValidator.ValidatePassword(pwd);
 
         long _id = AuthenticationEnforcer.VerifyUser(userName, pwd);
         if (_id != -1) {

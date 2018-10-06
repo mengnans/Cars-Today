@@ -4,6 +4,7 @@ import controllers.MyServlet;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import utils.AuthenticationEnforcer;
+import utils.InterceptingValidator;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -36,9 +37,9 @@ public class AdminLoginController extends MyServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String adminName = req.getParameter("adminName");
         String pwd = req.getParameter("password");
+        pwd = InterceptingValidator.ValidatePassword(pwd);
 
-
-        boolean _isSuccess =  AuthenticationEnforcer.VerifyAdmin(adminName, pwd);
+        boolean _isSuccess = AuthenticationEnforcer.VerifyAdmin(adminName, pwd);
 
         if (_isSuccess) {
             HttpSession session = req.getSession();
