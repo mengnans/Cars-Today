@@ -59,7 +59,7 @@ information (e.g. phone and address). Then a order will be created for the user,
 A registered user comes to the website, he/she first goes to sell my car tab, then clicks add a new car button. After filling out all the 
 necessary car details, he/she has created a new auction. He/she can check this auction later in Sell My Car tab.
 
-#### A registered user bids for a used car
+#### A registered user bids a used car
 A registered user comes to the website, he/she clicks one of the used cars on our home page. It will go to the car detail page.
 Then, the user clicks Bid Now Button, and fills out his/her phone/address/bid price, he/she has created a new bid. He/she can check this
 bid later in the My Bid tab.

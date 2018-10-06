@@ -44,30 +44,33 @@ public class AddBidController extends MyServlet {
 
         Long cid = Long.valueOf(req.getParameter("cid"));
 
-        if (createBid(req, cid, userIdInSession)) {
-
+        String message = createBid(req, cid, userIdInSession);
+        if ("Success".equals(message)) {
             forward("/bid?bid=success", req, resp);
         } else {
-            req.setAttribute("error", "Sorry, the auction for this car is closed");
-
+            req.setAttribute("error", message);
             forward("/error.jsp", req, resp);
         }
     }
 
-    private synchronized boolean createBid(HttpServletRequest req, Long cid, Long userId) {
+    private synchronized String createBid(HttpServletRequest req, Long cid, Long userId) {
         CarItem car = CarMapper.readCarByID("" + cid).get(0);
         int stock = car.getStock();
         if (stock > 0){
             String address = req.getParameter("address");
             String phone = req.getParameter("phone");
             double bidPrice = Double.parseDouble(req.getParameter("price"));
+            // lower than start price
+            if(bidPrice < car.getPrice()) {
+                return "Invalid auction, your bid price must be higher than start pirce: "  + car.getPrice();
+            }
             Bid bid = new Bid(cid, userId, address, phone, bidPrice);
             BidMapper.createBid(bid);
-            return true;
+            return "Success";
         }
         // the auction is closed
         else {
-            return false;
+            return "Sorry, the auction is closed";
         }
 
     }

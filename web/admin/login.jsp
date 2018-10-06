@@ -38,7 +38,7 @@
 
     <div class="container-fluid my-form">
         <div class="alert alert-info">
-            <strong>Tip:</strong> The admin name and password are written in our report's instruction section.
+            <strong>Tip:</strong> The admin name and password are written in our BitBucket README.md file.
         </div>
         <form action="/admin/login" method="post">
             <div class="form-group">

@@ -41,12 +41,10 @@
     &nbsp<a href="/user/car/info">Add New Car</a>
 </div>
 
-<div class="alert alert-info">
-    ${requestScope.get("bid_info")}
-</div>
-
-
 <div class="container-fluid my-list" style="margin-top: 16px;font-size: 18pt;">
+    <div class="alert alert-info">
+        ${requestScope.get("bid_info")}
+    </div>
     <c:forEach items="${_lstCar}" var="_item">
         <div class="row" style="border: 1px solid grey;">
             <div class="col-sm-4">
