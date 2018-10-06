@@ -23,16 +23,19 @@
 </head>
 <body>
 
-<nav class="navbar navbar-default navbar-fixed-top">
+<nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a class="navbar-brand" href="/home">Admin Mode</a>
+            <a class="navbar-brand" href="/home">Cars Today</a>
         </div>
         <ul class="nav navbar-nav">
-            <li class="active"><a href="/login">User Mode</a></li>
+            <li class="active"><a href="/admin/login">Admin Mode</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-            <li><a href="/logout"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+            <li><a href="/user/home"><span class="glyphicon glyphicon-user"></span>Sell My Cars</a></li>
+            <li><a href="/bid"><span class="glyphicon glyphicon-user"></span> My Bids</a></li>
+            <li><a href="/order"><span class="glyphicon glyphicon-user"></span> My Orders</a></li>
+            <li><a href="/logout"><span class="glyphicon glyphicon-log-in"></span> Log out</a></li>
         </ul>
     </div>
 </nav>

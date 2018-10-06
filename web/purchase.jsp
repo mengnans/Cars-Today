@@ -31,6 +31,8 @@
                 <li class="active"><a href="/admin/login">Admin Mode</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
+                <li><a href="/user/home"><span class="glyphicon glyphicon-user"></span>Sell My Cars</a></li>
+                <li><a href="/bid"><span class="glyphicon glyphicon-user"></span> My Bids</a></li>
                 <li><a href="/order"><span class="glyphicon glyphicon-user"></span> My Orders</a></li>
                 <li><a href="/logout"><span class="glyphicon glyphicon-log-in"></span> Log out</a></li>
             </ul>

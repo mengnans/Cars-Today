@@ -32,8 +32,7 @@
         <ul class="nav navbar-nav navbar-right">
             <li><a href="/admin/logout"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
         </ul>
-</div>
-</nav>
+    </nav>
 
 <div class="container-fluid my-form" style="margin-top: 64px">
     <form action="/admin/car/add" method="post">

@@ -35,7 +35,7 @@ public class UserHomeController extends MyServlet {
         ArrayList<CarItem> _lstCar = CarMapper.readUserUsedCar(userIdInSession + "");
         req.setAttribute("_lstCar", _lstCar);
         String bidInfo = (String) req.getAttribute("bid_info");
-        if(bidInfo.length() <= 0){
+        if(bidInfo == null || bidInfo.length() <= 0){
             String message;
             if(_lstCar.size() == 0) {
                 message = "you can create an auction for your used car by clicking Add New Car button on the top.";
