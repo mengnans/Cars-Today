@@ -17,7 +17,7 @@ import java.util.HashMap;
  */
 
 @WebServlet("/detail")
-public class CarDetailController extends MyServlet{
+public class CarDetailController extends MyServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -25,33 +25,35 @@ public class CarDetailController extends MyServlet{
         // if user didn't log in
         HttpSession session = req.getSession();
         Object userIdInSession = session.getAttribute("userId");
-        if (userIdInSession == null ){
+        if (userIdInSession == null) {
             forward("/login.jsp", req, resp);
         }
 
         Long cid = Long.valueOf(req.getParameter("cid"));
 
         if (cid == null) {
-            req.setAttribute("error","Car not found");
+            req.setAttribute("error", "Car not found");
             forward("/error.jsp", req, resp);
         }
 
         HashMap<Long, CarItem> cached = (HashMap<Long, CarItem>) session.getAttribute("cached");
-        if (cached == null){
+        if (cached == null) {
             cached = new HashMap<Long, CarItem>();
         }
 
         CarItem car = cached.get(cid);
         // if it's not in cached
-        if (car == null){
+        if (car == null) {
             car = CarMapper.readCarByID("" + cid).get(0);
             cached.put(cid, car);
         }
 
         req.setAttribute("car", car);
         session.setAttribute("cached", cached);
-
-        forward("/detail.jsp", req, resp);
-
+        if (car.getSellerId() == 0) {
+            forward("/detail.jsp", req, resp);
+        } else {
+            forward("/detailUsedCar.jsp", req, resp);
+        }
     }
 }

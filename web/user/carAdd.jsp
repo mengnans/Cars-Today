@@ -24,19 +24,19 @@
 <div>
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="navbar-header">
-            <a class="navbar-brand" href="/admin/home">Admin Mode</a>
+            <a class="navbar-brand" href="/home">Admin Mode</a>
         </div>
         <ul class="nav navbar-nav">
             <li class="active"><a href="/login">User Mode</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-            <li><a href="/admin/logout"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+            <li><a href="/logout"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
         </ul>
 </div>
 </nav>
 
 <div class="container-fluid my-form" style="margin-top: 64px">
-    <form action="/admin/car/add" method="post">
+    <form action="/user/car/add" method="post">
 
         <div class="form-group">
             <label for="brand">Brand:</label>
@@ -88,9 +88,18 @@
         </div>
 
         <div class="form-group">
-            <label for="stock">Stock:</label>
-            <input type="number" class="form-control" id="stock" placeholder="Enter the Stock" name="stock" min="0"
-                   max="10000">
+            <label for="location">Mileage:</label>
+            <input type="number" class="form-control" id="milage" placeholder="Enter the Milage" name="milage" min="0"
+                   max="1000000">
+        </div>
+
+        <div class="form-group">
+            <input type="hidden" class="form-control" id="stock" placeholder="Enter the Stock" name="stock" value="1">
+        </div>
+
+        <div class="form-group">
+            <input type="hidden" class="form-control" id="seller_id" placeholder="Enter the Stock" name="seller_id"
+                   value=<%=(request.getAttribute("userId"))%>>
         </div>
 
         <button type="submit" class="btn btn-default">Submit</button>

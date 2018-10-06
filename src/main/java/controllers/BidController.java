@@ -1,7 +1,9 @@
 package controllers;
 
+import dataAccess.BidMapper;
 import dataAccess.CarMapper;
 import dataAccess.OrderMapper;
+import models.Bid;
 import models.CarItem;
 import models.Order;
 
@@ -16,11 +18,11 @@ import java.util.HashMap;
 
 /**
  * @author Mengnan Shi
- * @create 2018-08-27-17:44
+ * @create 2018-09-28-16:23
  */
 
-@WebServlet("/order")
-public class OrderController extends MyServlet {
+@WebServlet("/bid")
+public class BidController extends MyServlet {
     private static final long serialVersionUID = 1L;
 
 
@@ -29,15 +31,15 @@ public class OrderController extends MyServlet {
         HttpSession session = req.getSession();
         Object userIdInSession = session.getAttribute("userId");
         if (userIdInSession != null) {
-            ArrayList<Order> orders = OrderMapper.readAllOrdersByUserId((Long) userIdInSession);
+            ArrayList<Bid> bids = BidMapper.readAllBidsByUserId((Long) userIdInSession);
 
-            String purchaseStatus = req.getParameter("purchase");
-            if (purchaseStatus != null && purchaseStatus.equals("success")) {
-                req.setAttribute("order_info",
-                        "Payment Success, please come back later to check the status of the order");
+            String bidStatus = req.getParameter("bid");
+            if (bidStatus != null && bidStatus.equals("success")) {
+                req.setAttribute("bid_info",
+                        "Bid Success, please come back later to check the status of the bids");
             } else {
-                req.setAttribute("order_info",
-                        "We are taking care of your orders, please come back later to check the status of the order");
+                req.setAttribute("bid_info",
+                        "We are taking care of your bids, please come back later to check the status of the bids");
             }
 
             // get cached car item data
@@ -46,24 +48,24 @@ public class OrderController extends MyServlet {
                 cached = new HashMap<Long, CarItem>();
             }
 
-            if (orders.size() >= 1) {
-                for (Order myOrder : orders) {
-                    Long carId = myOrder.getCarId();
+            if (bids.size() >= 1) {
+                for (Bid myBid : bids) {
+                    Long carId = myBid.getCarId();
                     CarItem car = cached.get(carId);
                     // if it's not in cached
                     if (car == null) {
                         car = CarMapper.readCarByID("" + carId).get(0);
                         cached.put(carId, car);
                     }
-                    myOrder.setCar(car);
+                    myBid.setCar(car);
                 }
-                req.setAttribute("orders", orders);
+                req.setAttribute("bids", bids);
                 session.setAttribute("cached", cached);
             } else {
-                req.setAttribute("error", "Sorry, it seems like you don't have any order");
+                req.setAttribute("error", "Sorry, it seems like you don't have any bid");
                 forward("/error.jsp", req, resp);
             }
-            forward("/order.jsp", req, resp);
+            forward("/bid.jsp", req, resp);
         } else {
             forward("/login.jsp", req, resp);
         }

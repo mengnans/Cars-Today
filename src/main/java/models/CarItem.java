@@ -27,6 +27,12 @@ public class CarItem {
 
     public CarItem() { }
 
+    public String getFuckingDisplayName() {
+        String _name = getBrand() + " " + getCarName();
+        if (getSellerId() != 0) _name = _name + " Used Car (" + getMilage() + " km)";
+        return _name;
+    }
+
     public int getVersion() { return version; }
 
     public long getCarId() { return carId; }

@@ -1,5 +1,6 @@
-package controllers;
+package controllers.user;
 
+import controllers.MyServlet;
 import dataAccess.CarMapper;
 import models.CarItem;
 
@@ -12,41 +13,64 @@ import java.io.IOException;
 
 /**
  * @author Ye Yan
- * @create 2018-9-27 14:22:00
+ * @create 2018-9-30 08:27:06
  */
 
-@WebServlet("/car/add")
-public class CarAddController extends MyServlet {
+@WebServlet("/user/car/edit")
+public class UserCarEditController extends MyServlet {
     private static final long serialVersionUID = 1L;
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        // if admin didn't log in
         HttpSession session = req.getSession();
-        Object adminIdInSession = session.getAttribute("adminId");
-        if (adminIdInSession == null ){
-            forward("/admin/login.jsp", req, resp);
+        Long userIdInSession = (Long) session.getAttribute("userId");
+        if (userIdInSession == null) {
+            forward("/login.jsp", req, resp);
+            return;
         }
 
         String priceString = req.getParameter("price");
         String stockString = req.getParameter("stock");
-        int price, stock;
+        String milageString = req.getParameter("milage");
+        String sellerIdString = req.getParameter("seller_id");
+
+        int price, stock, milage, seller_id;
         try {
             price = Integer.parseInt(priceString);
+            if (price < 0) {
+                forward("/user/home", req, resp);
+                return;
+            }
         } catch (Exception exception) {
             price = 0;
         }
 
         try {
             stock = Integer.parseInt(stockString);
-
         } catch (Exception exception) {
             stock = 0;
         }
 
+        try {
+            milage = Integer.parseInt(milageString);
+            if (milage < 0) {
+                forward("/user/home", req, resp);
+                return;
+            }
+        } catch (Exception exception) {
+            milage = 0;
+        }
+
+        try {
+            seller_id = Integer.parseInt(sellerIdString);
+        } catch (Exception exception) {
+            seller_id = 0;
+        }
+
         CarItem _catItem = new CarItem();
-        _catItem.setVersion(0);
+        _catItem.setVersion(Integer.parseInt(req.getParameter("version")));
+        _catItem.setCarId(Long.parseLong(req.getParameter("cars_id")));
         _catItem.setBrand(req.getParameter("brand"));
         _catItem.setCarType(req.getParameter("car_type"));
         _catItem.setCarName(req.getParameter("car_name"));
@@ -55,11 +79,12 @@ public class CarAddController extends MyServlet {
         _catItem.setImage(req.getParameter("image"));
         _catItem.setPrice(price);
         _catItem.setLocation(req.getParameter("location"));
-        _catItem.setMilage(0);
+        _catItem.setMilage(milage);
         _catItem.setDescription(req.getParameter("description"));
         _catItem.setStock(stock);
-        CarMapper.createCar(_catItem);
-        forward("/admin/home", req, resp);
+        _catItem.setSellerId(seller_id);
+        CarMapper.updateCar(_catItem);
+        forward("/user/home", req, resp);
     }
 
 }

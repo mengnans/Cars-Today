@@ -19,27 +19,32 @@
 
     <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <title>Admin home</title>
+    <title>User sells cars</title>
 </head>
 <body>
 
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a class="navbar-brand" href="/admin/home">Admin Mode</a>
+            <a class="navbar-brand" href="/home">Admin Mode</a>
         </div>
         <ul class="nav navbar-nav">
             <li class="active"><a href="/login">User Mode</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-            <li><a href="/admin/logout"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+            <li><a href="/logout"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
         </ul>
     </div>
 </nav>
 
 <div style="margin-top: 64px;font-size: 24pt;">
-    &nbsp<a href="/admin/car/info">Add New Car</a>
+    &nbsp<a href="/user/car/info">Add New Car</a>
 </div>
+
+<div class="alert alert-info">
+    ${requestScope.get("bid_info")}
+</div>
+
 
 <div class="container-fluid my-list" style="margin-top: 16px;font-size: 18pt;">
     <c:forEach items="${_lstCar}" var="_item">
@@ -60,8 +65,8 @@
             </div>
             <div class="col-sm-2">
                 <ul>
-                    <li><a href="/admin/car/info?id=${_item.getCarId()}"> Edit </a></li>
-                    <li><a href="/admin/car/delete?id=${_item.getCarId()}"> Delete </a></li>
+                    <li><a href="/user/car/info?id=${_item.getCarId()}"> Edit </a></li>
+                    <li><a href="/close-bid?cid=${_item.getCarId()}"> Close Auction</a></li>
                 </ul>
             </div>
         </div>

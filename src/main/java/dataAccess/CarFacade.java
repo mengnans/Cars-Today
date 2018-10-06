@@ -31,5 +31,4 @@ public class CarFacade {
         _blkData[12] = _car.getStock() + "";
         return _blkData;
     }
-
 }

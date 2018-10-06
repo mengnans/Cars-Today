@@ -1,5 +1,6 @@
-package controllers;
+package controllers.admin;
 
+import controllers.MyServlet;
 import dataAccess.CarMapper;
 import models.CarItem;
 
@@ -13,11 +14,11 @@ import java.util.ArrayList;
 
 /**
  * @author Ye Yan
- * @create 2018-8-31 19:54:16
+ * @create 2018-8-28 20:51:00
  */
 
-@WebServlet("/admin/car/delete")
-public class AdminCarDeleteController extends MyServlet {
+@WebServlet("/admin/car/info")
+public class AdminCarInfoController extends MyServlet {
     private static final long serialVersionUID = 1L;
 
     @Override
@@ -31,17 +32,12 @@ public class AdminCarDeleteController extends MyServlet {
 
         String _id = req.getParameter("id");
         ArrayList<CarItem> _lstCar = CarMapper.readCarByID(_id);
-        for (int i = 0; i < _lstCar.size(); i++) {
-            // instead of deleting the car directly
-            // we set the stock of car 0
-            _lstCar.get(i).setStock(0);
-            CarMapper.updateCar(_lstCar.get(i));
+        if (_lstCar.size() == 0) {
+            forward("/admin/carAdd.jsp", req, resp);
+        } else {
+            req.setAttribute("car", _lstCar.get(0));
+            forward("/admin/carEdit.jsp", req, resp);
         }
-        forward("/admin/home", req, resp);
     }
 
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        doGet(req, resp);
-    }
 }

@@ -13,11 +13,7 @@ public class StockDTO {
 
     private ArrayList<CarItemDTO> listCar;
 
-
-
     public StockDTO() { }
-
-
 
     public ArrayList<CarItemDTO> getListCar() {
         return listCar;
@@ -27,15 +23,15 @@ public class StockDTO {
         this.listCar = listCar;
     }
 
-
-
-
     public String toJson() {
         Gson gson = new Gson();
         String json = gson.toJson(this);
         return json;
     }
 
-
-
+    public static StockDTO fromJson(String argData) {
+        Gson gson = new Gson();
+        StockDTO object = gson.fromJson(argData, StockDTO.class);
+        return object;
+    }
 }

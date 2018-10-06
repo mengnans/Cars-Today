@@ -1,5 +1,6 @@
-package controllers;
+package controllers.user;
 
+import controllers.MyServlet;
 import dataAccess.CarMapper;
 import models.CarItem;
 
@@ -13,27 +14,27 @@ import java.util.ArrayList;
 
 /**
  * @author Ye Yan
- * @create 2018-8-28 20:51:00
+ * @create 2018-9-29 20:12:54
  */
 
-@WebServlet("/admin/home")
-public class AdminHomeController extends MyServlet {
+@WebServlet("/user/home")
+public class UserHomeController extends MyServlet {
     private static final long serialVersionUID = 1L;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        // if admin didn't log in
         HttpSession session = req.getSession();
-        Object adminIdInSession = session.getAttribute("adminId");
-        if (adminIdInSession == null ){
-            forward("/admin/login.jsp", req, resp);
+        Long userIdInSession = (Long) session.getAttribute("userId");
+        if (userIdInSession == null) {
+            forward("/login.jsp", req, resp);
+            return;
         }
 
 
-        ArrayList<CarItem>  _lstCar = CarMapper.readCar();
+        ArrayList<CarItem> _lstCar = CarMapper.readUserUsedCar(userIdInSession + "");
         req.setAttribute("_lstCar", _lstCar);
-        forward("/admin/home.jsp", req, resp);
+        forward("/user/home.jsp", req, resp);
     }
 
     @Override

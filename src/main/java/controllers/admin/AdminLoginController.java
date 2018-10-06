@@ -1,8 +1,10 @@
-package controllers;
+package controllers.admin;
 
-import dataAccess.AdminMapper;
-import models.Administrator;
-import utils.Utils;
+import controllers.MyServlet;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.*;
+import utils.AuthenticationEnforcer;
+import utils.InterceptingValidator;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -24,7 +26,7 @@ public class AdminLoginController extends MyServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
         Object adminIdInSession = session.getAttribute("adminId");
-        if (adminIdInSession != null ){
+        if (adminIdInSession != null) {
             forward("/admin/home", req, resp);
         } else {
             forward("/admin/login.jsp", req, resp);
@@ -34,26 +36,20 @@ public class AdminLoginController extends MyServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String adminName = req.getParameter("adminName");
-        // find the user from database
-        Administrator admin = AdminMapper.readAdminByAdminName(adminName);
+        String pwd = req.getParameter("password");
+        pwd = InterceptingValidator.ValidatePassword(pwd);
 
-        // if find such user
-        if (admin != null) {
-            String pwd = req.getParameter("password");
-            String encryptedPwd = Utils.getMd5(pwd);
-            // correct password
-            if (encryptedPwd != null && encryptedPwd.equals(admin.getPassword())){
-                HttpSession session = req.getSession();
-                session.setAttribute("adminId", admin.getAid());
-                session.setAttribute("adminName", admin.getAdminName());
-                forward("/admin/home", req, resp);
-                return;
-            }
+        boolean _isSuccess = AuthenticationEnforcer.VerifyAdmin(adminName, pwd);
+
+        if (_isSuccess) {
+            HttpSession session = req.getSession();
+            session.setAttribute("adminId", adminName);
+            session.setAttribute("adminName", adminName);
+            forward("/admin/home", req, resp);
+        } else {
+            req.setAttribute("error", "Incorrect username or password");
+            forward("/admin/error.jsp", req, resp);
+
         }
-
-        // otherwise
-        req.setAttribute("error","Incorrect username or password");
-        forward("/admin/error.jsp", req, resp);
-
     }
 }

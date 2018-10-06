@@ -1,5 +1,6 @@
-package controllers;
+package controllers.user;
 
+import controllers.MyServlet;
 import dataAccess.CarMapper;
 import models.CarItem;
 
@@ -13,30 +14,30 @@ import java.util.ArrayList;
 
 /**
  * @author Ye Yan
- * @create 2018-8-28 20:51:00
+ * @create 2018-9-29 21:04:31
  */
 
-@WebServlet("/admin/car/info")
-public class AdminCarInfoController extends MyServlet {
+@WebServlet("/user/car/info")
+public class UserCarInfoController extends MyServlet {
     private static final long serialVersionUID = 1L;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        // if admin didn't log in
         HttpSession session = req.getSession();
-        Object adminIdInSession = session.getAttribute("adminId");
-        if (adminIdInSession == null ){
-            forward("/admin/login.jsp", req, resp);
+        Long userIdInSession = (Long) session.getAttribute("userId");
+        if (userIdInSession == null) {
+            forward("/login.jsp", req, resp);
+            return;
         }
 
         String _id = req.getParameter("id");
         ArrayList<CarItem> _lstCar = CarMapper.readCarByID(_id);
+        req.setAttribute("userId", userIdInSession);
         if (_lstCar.size() == 0) {
-            forward("/admin/carAdd.jsp", req, resp);
+            forward("/user/carAdd.jsp", req, resp);
         } else {
             req.setAttribute("car", _lstCar.get(0));
-            forward("/admin/carEdit.jsp", req, resp);
+            forward("/user/carEdit.jsp", req, resp);
         }
     }
-
 }

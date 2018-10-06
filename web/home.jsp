@@ -32,6 +32,7 @@
             <li class="active"><a href="/admin/login">Admin Mode</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
+            <li><a href="/user/home"><span class="glyphicon glyphicon-user"></span>Sell Cars</a></li>
             <li><a href="/order"><span class="glyphicon glyphicon-user"></span> My Orders</a></li>
             <li><a href="/logout"><span class="glyphicon glyphicon-log-in"></span> Log out</a></li>
         </ul>
@@ -52,7 +53,7 @@
                 <img src="${_item.getImage()}" style="width:25vw;">
             </div>
             <div class="col-sm-8">
-                <a href="detail?cid=${_item.getCarId()}"> ${_item.getBrand()} ${_item.getCarName()}</a>
+                <a href="detail?cid=${_item.getCarId()}"> ${_item.getFuckingDisplayName()}</a>
                 <ul>
                     <li>Brand: ${_item.getBrand()}</li>
                     <li>CarType: ${_item.getCarType()}</li>

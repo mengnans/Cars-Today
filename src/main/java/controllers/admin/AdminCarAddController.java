@@ -1,5 +1,6 @@
-package controllers;
+package controllers.admin;
 
+import controllers.MyServlet;
 import dataAccess.CarMapper;
 import models.CarItem;
 
@@ -26,7 +27,7 @@ public class AdminCarAddController extends MyServlet {
         // if admin didn't log in
         HttpSession session = req.getSession();
         Object adminIdInSession = session.getAttribute("adminId");
-        if (adminIdInSession == null ){
+        if (adminIdInSession == null) {
             forward("/admin/login.jsp", req, resp);
         }
 
@@ -35,14 +36,12 @@ public class AdminCarAddController extends MyServlet {
         int price, stock;
         try {
             price = Integer.parseInt(priceString);
-
         } catch (Exception exception) {
             price = 0;
         }
 
         try {
             stock = Integer.parseInt(stockString);
-
         } catch (Exception exception) {
             stock = 0;
         }
