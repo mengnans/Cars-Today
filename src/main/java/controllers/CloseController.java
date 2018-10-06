@@ -3,9 +3,11 @@ package controllers;
 import dataAccess.BidMapper;
 import dataAccess.CarMapper;
 import dataAccess.OrderMapper;
+import dataAccess.UserMapper;
 import models.Bid;
 import models.CarItem;
 import models.Order;
+import models.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -33,6 +35,19 @@ public class CloseController extends MyServlet {
             ArrayList<Bid> bids = BidMapper.readAllBidsByCarId(cid);
             double maxPrice = 0;
             Bid maxBid = null;
+
+            if (bids.size() == 0){
+                // update car db
+                CarItem car = CarMapper.readCarByID(""+cid).get(0);
+                car.setStock(0);
+                CarMapper.updateCar(car);
+
+                req.setAttribute("bid_info",
+                        "Auction closed, no valid bid");
+
+                forward("/user/home", req, resp);
+            }
+
             for (Bid bid: bids
                  ) {
                 double price = bid.getBidPrice();
@@ -60,8 +75,15 @@ public class CloseController extends MyServlet {
             // update order db
             String address = maxBid.getAddress();
             String phone = maxBid.getPhone();
-            Order order = new Order(cid, userIdInSession, address, phone);
+            Order order = new Order(cid, maxBid.getUserId(), address, phone);
             OrderMapper.createOrder(order);
+
+            User user = UserMapper.readUserById(maxBid.getUserId());
+            String userName = user.getUserName();
+            double price = maxBid.getBidPrice();
+
+            req.setAttribute("bid_info",
+                    "Auction closed, " + userName + " with " + price + "$ win the auction");
 
             forward("/user/home", req, resp);
 

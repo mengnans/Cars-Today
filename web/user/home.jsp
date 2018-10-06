@@ -41,6 +41,11 @@
     &nbsp<a href="/user/car/info">Add New Car</a>
 </div>
 
+<div class="alert alert-info">
+    ${requestScope.get("bid_info")}
+</div>
+
+
 <div class="container-fluid my-list" style="margin-top: 16px;font-size: 18pt;">
     <c:forEach items="${_lstCar}" var="_item">
         <div class="row" style="border: 1px solid grey;">
@@ -61,7 +66,7 @@
             <div class="col-sm-2">
                 <ul>
                     <li><a href="/user/car/info?id=${_item.getCarId()}"> Edit </a></li>
-                    <li><a href="/user/car/delete?id=${_item.getCarId()}"> Close Auction</a></li>
+                    <li><a href="/close-bid?cid=${_item.getCarId()}"> Close Auction</a></li>
                 </ul>
             </div>
         </div>
