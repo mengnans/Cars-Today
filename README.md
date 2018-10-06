@@ -17,10 +17,10 @@ You can create your own user on https://whispering-oasis-77503.herokuapp.com/sig
 
 Or
 
-You can use this account: user name is **test**, and the password is **test**.
+You can use this account: username is **test**, password is **test**.
 
 **Note that:**
-The login page for normal user is https://whispering-oasis-77503.herokuapp.com/login
+The login page for the normal user is https://whispering-oasis-77503.herokuapp.com/login
 
 ### Role explanation
 
@@ -50,14 +50,14 @@ After that, he clicks Add New Car button, and after filling out some necessary c
 has been created, and it can be purchased by users.
 
 #### A new user buys a new car
-A new user comes to the website, he/she firstly sign-up his/her account, and then login. After that, he/she checks all the car
+A new user comes to the website, he/she firstly sign-up his/her account, and then login to the website. After that, he/she checks all the car
 listed on our home page. Then decide to buy Bentley Bentayga, he/she click the "Bentley Bentayga" button, and it will go to the detail page
-for the Bentley Bentayga car. Then the user clicks buy now, it will go to purchase page. The user will need to fill out some necessary
+for the Bentley Bentayga car. Then the user clicks buy now, it will go to the purchase page. The user will need to fill out some necessary
 information (e.g. phone and address). Then a order will be created for the user, which he/she can check later at the My Order tab.
 
 #### A registered user creates an auction
-A registered user comes to the website, he/she firstly goes to sell my car tab, then clicks add a new car button. After filling out all 
-the necessary car details, he/she has created a new auction. He/she can check this auction later in Sell My Car tab.
+A registered user comes to the website, he/she first goes to sell my car tab, then clicks add a new car button. After filling out all the 
+necessary car details, he/she has created a new auction. He/she can check this auction later in Sell My Car tab.
 
 #### A registered user bids for a used car
 A registered user comes to the website, he/she clicks one of the used cars on our home page. It will go to the car detail page.
@@ -65,7 +65,8 @@ Then, the user clicks Bid Now Button, and fills out his/her phone/address/bid pr
 bid later in the My Bid tab.
 
 #### A registered user closes his/her auction
-A registered user comes to the website, he/she firstly goes to Sell My Car tab, then he click Close Auction button to one of his/her cars
-that he/she wanted to close the auction. Then the auction is closed, the website will show the result of the auction (e.g. winner with price or no valid bids).
-After that, for those users who bid the car, the status of their bids will be changed (for the winner it will be changed to successful bid, for the others it will be changed to failed bid).
+A registered user comes to the website, he/she first goes to Sell My Car tab, then he clicks Close Auction button to one of his/her cars
+that he/she wanted to close the auction. Then the auction is closed, the website will show the result of the auction (e.g. winner with price 
+or no valid bids). After that, for those users who bid the car, the status of their bids will be changed (for the winner it will be changed 
+to a successful bid, for the others it will be changed to failed bid).
 Meanwhile, a new order will be created for the winner.

@@ -73,7 +73,7 @@ public class CarMapper {
     }
 
     public static ArrayList<String> readAllBrand() {
-        String _sql = "SELECT DISTINCT brand FROM cars";
+        String _sql = "SELECT DISTINCT brand FROM cars where stock > 0";
         ResultSet resultSet = ExecuteQuerySql(_sql);
         ArrayList<String> _lstBrand = new ArrayList<String>();
         try {
